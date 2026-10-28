@@ -17,6 +17,9 @@ before(async () => {
   base = `http://127.0.0.1:${server.address().port}/`;
   apiBase = `http://127.0.0.1:${apiServer.address().port}/`;
   browser = await chromium.launch();
+  // 既存テストは日本語表示を前提にする（ブラウザ言語による自動切替を固定）
+  const newContext = browser.newContext.bind(browser);
+  browser.newContext = (o = {}) => newContext({ locale: 'ja-JP', ...o });
 });
 after(async () => { await browser?.close(); server?.close(); apiServer?.close(); });
 
@@ -74,8 +77,7 @@ async function openShelters(opts) {
 test('現在地から探す：許可時は近い順、選んだ災害種別の施設だけ、位置はサーバーへ送らない', async () => {
   const { ctx, page, posts } = await openShelters({ permissions: ['geolocation'], geolocation: { latitude: 35.3389, longitude: 139.4877 } });
   assert.equal(await page.evaluate(() => window.__geoCalls), 0, '押す前は取得しない');
-  await page.check('#hz-tsunami');
-  await page.click('#locate-btn');
+  await page.click('#hz-tsunami');
   await page.waitForSelector('#results li.card');
   assert.equal(await page.evaluate(() => window.__geoCalls), 1);
   const text = await page.textContent('#results-summary');
@@ -87,7 +89,7 @@ test('現在地から探す：許可時は近い順、選んだ災害種別の�
   assert.ok(tags.every((t) => t.includes('津波')), '津波に対応しない施設が混ざっていない');
   assert.ok(!(await page.textContent('#results')).includes('藤沢市民会館'), '休止中の施設を出さない');
   assert.match(await page.textContent('#results-summary'), /直線距離です/);
-  const mapHref = await page.getAttribute('#results li.card a.btn >> nth=1', 'href');
+  const mapHref = await page.getAttribute('#results li.card a.route >> nth=0', 'href');
   assert.match(mapHref, /^https:\/\/www\.google\.com\/maps\/dir\/\?api=1/);
   assert.ok(!mapHref.includes('35.3389'), '現在地をURLに含めない');
   assert.deepEqual(posts, [], 'POST 等の送信なし');
@@ -96,14 +98,18 @@ test('現在地から探す：許可時は近い順、選んだ災害種別の�
 
 test('位置情報を拒否しても手動で探せる', async () => {
   const { ctx, page } = await openShelters({ permissions: [] });
-  await page.check('#hz-earthquake');
-  await page.click('#locate-btn');
+  await page.click('#hz-earthquake');
   await page.waitForSelector('#locate-state .notice');
   assert.match(await page.textContent('#locate-state'), /許可されませんでした|取得できませんでした/);
+  // 拒否されてもすぐに一覧が出る
+  await page.waitForSelector('#results li.card');
+  assert.match(await page.textContent('#results-summary'), /住所順/);
+  // 地区・名前でも探せる
+  await page.click('#manual-box summary');
   await page.fill('#query', '辻堂');
   await page.click('#search-form button[type=submit]');
-  await page.waitForSelector('#results li.card');
-  assert.match(await page.textContent('#results-summary'), /辻堂/);
+  await page.waitForFunction(() => document.getElementById('results-summary').textContent.includes('辻堂'));
+  assert.equal(await page.inputValue('#m-hazard'), 'earthquake');
   await ctx.close();
 });
 
@@ -117,9 +123,9 @@ test('位置情報に非対応の端末・タイムアウトでも案内が出�
     }, mode);
     const page = await ctx.newPage();
     await page.goto(base + 'shelters.html', { waitUntil: 'networkidle' });
-    await page.check('#hz-flood');
-    await page.click('#locate-btn');
+    await page.click('#hz-flood');
     await page.waitForSelector('#locate-state .notice');
+    await page.waitForSelector('#results li.card');
     assert.match(await page.textContent('#locate-state'), mode === 'timeout' ? /時間がかかりすぎた/ : /利用できません/);
     await ctx.close();
   }
@@ -131,7 +137,8 @@ test('データ取得失敗時は公式一覧へ案内し、架空の結果を�
   await page.route('**/data/shelters.json', (r) => r.fulfill({ status: 500, body: 'x' }));
   await page.goto(base + 'shelters.html', { waitUntil: 'networkidle' });
   assert.match(await page.textContent('#data-state'), /読み込めませんでした/);
-  assert.ok(await page.isHidden('#search-form'));
+  assert.ok(await page.isHidden('#pick'));
+  assert.equal(await page.locator('#results li.card').count(), 0);
   await ctx.close();
 });
 
@@ -219,9 +226,6 @@ test('混雑共有：API障害時に送信成功と表示しない', async () =>
 test('キーボードだけで避難先を検索できる', async () => {
   const { ctx, page } = await open(base + 'shelters.html');
   await page.focus('#hz-flood');
-  await page.keyboard.press('Space');
-  await page.focus('#query');
-  await page.keyboard.type('鵠沼');
   await page.keyboard.press('Enter');
   await page.waitForSelector('#results li.card');
   assert.equal(await page.evaluate(() => document.activeElement.id), 'h-results', '結果見出しへフォーカス移動');

@@ -1,18 +1,21 @@
 // 全ページ共通：オフライン表示・Service Worker 登録・データ取得の補助
+import { t, locale, ready } from './i18n.js';
+
+export { t, ready };
 export const SAVED_AT_HEADER = 'X-FL-Saved-At';
 
 export function formatDateTimeJa(value) {
-  if (!value) return '不明';
+  if (!value) return t('common.unknown', '不明');
   const d = new Date(value);
-  if (Number.isNaN(d.getTime())) return '不明';
-  return d.toLocaleString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
+  if (Number.isNaN(d.getTime())) return t('common.unknown', '不明');
+  return d.toLocaleString(locale(), { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' });
 }
 
 export function formatDateJa(value) {
-  if (!value) return '不明';
+  if (!value) return t('common.unknown', '不明');
   const d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T00:00:00+09:00` : value);
-  if (Number.isNaN(d.getTime())) return '不明';
-  return d.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Tokyo' });
+  if (Number.isNaN(d.getTime())) return t('common.unknown', '不明');
+  return d.toLocaleDateString(locale(), { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Tokyo' });
 }
 
 export function el(tag, attrs = {}, ...children) {
@@ -52,13 +55,15 @@ function updateOfflineBanner() {
 }
 
 export function initCommon() {
-  if (!document.getElementById('offline-banner')) {
-    const b = el('div', { id: 'offline-banner', class: 'offline-banner', role: 'status' },
-      'オフラインです。表示中の内容は端末に保存されたもので、最新の情報を確認できません。');
-    b.hidden = true;
-    document.body.prepend(b);
-  }
-  updateOfflineBanner();
+  ready.then(() => {
+    if (!document.getElementById('offline-banner')) {
+      const b = el('div', { id: 'offline-banner', class: 'offline-banner', role: 'status' },
+        t('common.offline', 'オフラインです。表示中の内容は端末に保存されたもので、最新の情報を確認できません。'));
+      b.hidden = true;
+      document.body.prepend(b);
+    }
+    updateOfflineBanner();
+  });
   window.addEventListener('online', updateOfflineBanner);
   window.addEventListener('offline', updateOfflineBanner);
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {

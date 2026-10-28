@@ -29,7 +29,7 @@ const rows = [];
 const external = [];
 try {
   for (const page of PAGES) {
-    const ctx = await browser.newContext({ serviceWorkers: 'block', viewport: { width: 390, height: 844 } });
+    const ctx = await browser.newContext({ serviceWorkers: 'block', viewport: { width: 390, height: 844 }, locale: 'ja-JP' });
     const tab = await ctx.newPage();
     const urls = new Set();
     tab.on('request', (r) => {
@@ -53,6 +53,11 @@ try {
   let swRaw = 0; let swGz = 0;
   for (const p of list) { const s = await sizes(`/${p === './' ? '' : p}`); swRaw += s.raw; swGz += s.gz; }
   rows.push({ page: '（SW事前キャッシュ全体）', requests: list.length, raw: swRaw, gz: swGz, files: [] });
+  // 日本語以外の言語では、その言語の辞書を1つだけ追加で読み込む
+  for (const lang of ['en', 'zh', 'ko', 'vi']) {
+    const s = await sizes(`/assets/i18n/${lang}.json`);
+    rows.push({ page: `（辞書 ${lang}・その言語のときだけ）`, requests: 1, raw: s.raw, gz: s.gz, files: [] });
+  }
 } finally {
   await browser.close();
   server.close();

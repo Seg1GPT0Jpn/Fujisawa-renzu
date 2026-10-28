@@ -202,3 +202,25 @@ table.water td { text-align: center; }
 .check-item small, #focus-options small { display: block; color: var(--muted); font-size: 0.85rem; }
 .check-item .src { margin: 0 0 4px 32px; }
 .g-aa a, .g-a a, .g-b a, .g-c a { color: #0b3d75; }
+
+/* ---- ワンタップ検索・経路ボタン・言語切替 ---- */
+.pick-title { margin-top: 12px; }
+#pick-hint { margin: 0 0 8px; }
+button.tile { font-family: inherit; width: 100%; }
+.tile[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); }
+.tile[aria-pressed="true"] small { color: var(--accent-fg); }
+.tile[aria-pressed="true"]::before { content: "✓ "; }
+.btn.route { display: block; width: 100%; margin: 6px 0; padding: 12px; background: var(--accent); color: var(--accent-fg); font-size: 1.05rem; }
+.card.nearest { border: 3px solid var(--accent); }
+.nearest-label { margin: 0 0 2px; font-weight: 700; color: var(--accent); font-size: 0.95rem; }
+.manual-box { margin: 16px 0; }
+.manual-box summary { font-size: 1rem; }
+header.site { position: relative; }
+.lang-switch { position: absolute; top: 6px; right: 16px; }
+.lang-switch label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.lang-switch select { width: auto; min-height: 40px; padding: 2px 6px; font-size: 0.95rem; }
+header.site .brand { display: inline-block; max-width: calc(100% - 9.5em); }
+.i18n-note { border-left: 4px solid var(--line); padding-left: 8px; color: var(--muted); }
+.notice.compact { padding: 8px 10px; }
+.notice.compact p { margin: 0 0 6px; }
+p.designated { margin: 6px 0; }

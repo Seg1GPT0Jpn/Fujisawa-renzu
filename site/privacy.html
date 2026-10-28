@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" data-page="privacy" data-i18n-ja-only="true">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,20 +8,20 @@
 <link rel="icon" href="data:,">
 </head>
 <body>
-<a class="skip" href="#main">本文へ移動</a>
+<a class="skip" href="#main" data-i18n="nav.skip">本文へ移動</a>
 <header class="site">
-  <a class="brand" href="./">ふじさわレンズ</a>
-  <nav aria-label="サイト内">
+  <a class="brand" href="./" data-i18n="brand">ふじさわレンズ</a>
+  <nav aria-label="サイト内" data-i18n-attr="aria-label:nav.label">
     <ul>
-      <li><a href="shelters.html">避難先</a></li>
-      <li><a href="crowding.html">開設・混雑</a></li>
-      <li><a href="environment.html">環境</a></li>
-      <li><a href="prepare.html">備え</a></li>
+      <li><a href="shelters.html" data-i18n="nav.shelters">避難先</a></li>
+      <li><a href="crowding.html" data-i18n="nav.crowding">開設・混雑</a></li>
+      <li><a href="environment.html" data-i18n="nav.environment">環境</a></li>
+      <li><a href="prepare.html" data-i18n="nav.prepare">備え</a></li>
     </ul>
   </nav>
 </header>
 <main id="main">
-  <h1>プライバシー・注意事項</h1>
+  <h1 data-i18n="privacy.h1">プライバシー・注意事項</h1>
 
   <h2>公式情報との関係</h2>
   <ul>
@@ -53,6 +53,12 @@
     <li>チェックリストのページの「チェックをすべて消す」、またはブラウザの設定（サイトデータの削除）で消去できます。プライベートブラウズでは保存されない場合があります。</li>
   </ul>
 
+  <h2>表示言語</h2>
+  <ul>
+    <li>表示言語は、ブラウザの言語設定から自動で選びます。言語を切り替えた場合、その選択をこの端末のブラウザの保存領域（localStorage）に保存します。サーバーには送信しません。</li>
+    <li>日本語以外の表示はふじさわレンズによる翻訳で、公式の情報は日本語です。施設名・住所は公式データの日本語表記のまま表示します。</li>
+  </ul>
+
   <h2>解析・広告</h2>
   <p>アクセス解析タグ、広告、外部フォント、外部画像は読み込んでいません。Cookie は使用しません。</p>
 
@@ -65,10 +71,10 @@
 </main>
 <footer class="site">
   <ul>
-    <li><a href="sources.html">出典・データの扱い・更新状況</a></li>
-    <li><a href="privacy.html">プライバシー・注意事項</a></li>
+    <li><a href="sources.html" data-i18n="footer.sources">出典・データの扱い・更新状況</a></li>
+    <li><a href="privacy.html" data-i18n="footer.privacy">プライバシー・注意事項</a></li>
   </ul>
-  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
+  <p data-i18n="footer.unofficial">ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
 </footer>
 <script type="module" src="assets/js/common-init.js"></script>
 </body>

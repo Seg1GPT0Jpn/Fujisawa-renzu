@@ -12,6 +12,9 @@ before(async () => {
   server = await startServer({ port: 0, quiet: true });
   base = `http://127.0.0.1:${server.address().port}/`;
   browser = await chromium.launch();
+  // 既存テストは日本語表示を前提にする（ブラウザ言語による自動切替を固定）
+  const newContext = browser.newContext.bind(browser);
+  browser.newContext = (o = {}) => newContext({ locale: 'ja-JP', ...o });
 });
 after(async () => { await browser?.close(); server?.close(); });
 

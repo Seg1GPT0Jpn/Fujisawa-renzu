@@ -14,6 +14,9 @@ before(async () => {
   server = await startServer({ port: 0, quiet: true });
   base = `http://127.0.0.1:${server.address().port}/`;
   browser = await chromium.launch();
+  // 既存テストは日本語表示を前提にする（ブラウザ言語による自動切替を固定）
+  const newContext = browser.newContext.bind(browser);
+  browser.newContext = (o = {}) => newContext({ locale: 'ja-JP', ...o });
 });
 after(async () => { await browser?.close(); server?.close(); });
 
@@ -28,11 +31,12 @@ test('ホーム：3つの入口が1〜2画面に収まり、災害種別が1タ�
   const { ctx, page } = await ctxPage();
   await page.goto(base, { waitUntil: 'networkidle' });
   assert.ok(await top(page, '#h-emergency') < 200, '災害時の入口が最上部');
-  assert.ok(await top(page, 'a.tile[href="shelters.html?hazard=tsunami"]') < VIEW.height, '津波ボタンが1画面目');
+  assert.ok(await top(page, 'a.tile[href^="shelters.html?hazard=tsunami"]') < VIEW.height, '津波ボタンが1画面目');
   for (const id of ['#h-env', '#h-prepare']) assert.ok(await page.isVisible(id));
-  await page.click('a.tile[href="shelters.html?hazard=tsunami"]');
-  await page.waitForSelector('#hz-tsunami');
-  assert.equal(await page.isChecked('#hz-tsunami'), true, '検索画面で種別が選択済み');
+  await page.click('a.tile[href^="shelters.html?hazard=tsunami"]');
+  await page.waitForSelector('#hz-tsunami[aria-pressed="true"]');
+  await page.waitForSelector('#results li.card');
+  assert.match(await page.textContent('#results-summary'), /津波/);
   await ctx.close();
 });
 
@@ -46,19 +50,17 @@ test('ホームの災害種別ボタンはすべてデータに存在する種�
   assert.ok(!keys.includes('storm_surge'));
 });
 
-test('避難先：種別ボタンと「現在地から探す」が1画面目に収まる', async () => {
+test('避難先：すべての災害種別ボタンが1画面目に収まる', async () => {
   const { ctx, page } = await ctxPage();
-  await page.goto(base + 'shelters.html?hazard=flood', { waitUntil: 'networkidle' });
-  const btn = await top(page, '#locate-btn');
-  assert.ok(btn + 56 <= VIEW.height, `locate-btn top=${btn}`);
-  assert.ok(await top(page, '#hz-flood') < VIEW.height);
+  await page.goto(base + 'shelters.html', { waitUntil: 'networkidle' });
+  const last = await top(page, '#hz-shelter');
+  assert.ok(last + 52 <= VIEW.height, `hz-shelter top=${last}`);
   await ctx.close();
 });
 
 test('津波：結果より前に津波避難ビルの案内、市のみ指定の施設は推奨せず名前だけ案内', async () => {
   const { ctx, page } = await ctxPage({ permissions: ['geolocation'], geolocation: { latitude: 35.3175, longitude: 139.4715 } });
-  await page.goto(base + 'shelters.html?hazard=tsunami', { waitUntil: 'networkidle' });
-  await page.click('#locate-btn');
+  await page.goto(base + 'shelters.html?hazard=tsunami&go=1', { waitUntil: 'networkidle' });
   await page.waitForSelector('#results li.card');
   const order = await page.evaluate(() => {
     const pre = document.getElementById('results-pre');
@@ -67,9 +69,9 @@ test('津波：結果より前に津波避難ビルの案内、市のみ指定�
     return link && (link.compareDocumentPosition(list) & Node.DOCUMENT_POSITION_FOLLOWING) ? 'before' : 'after';
   });
   assert.equal(order, 'before');
-  const pre = await page.textContent('#results-pre');
-  assert.match(pre, /鵠南小学校/);
-  assert.match(pre, /公式一覧で確認が必要/);
+  const post = await page.textContent('#results-post');
+  assert.match(post, /鵠南小学校/);
+  assert.match(post, /公式一覧で確認が必要/);
   const names = await page.$$eval('#results li.card h3', (hs) => hs.map((h) => h.textContent));
   assert.ok(!names.includes('鵠南小学校'), '市のみ指定の施設を推奨一覧に入れない');
   await ctx.close();
@@ -77,12 +79,12 @@ test('津波：結果より前に津波避難ビルの案内、市のみ指定�
 
 test('結果の先頭に「指定施設であり開設状況ではない」旨と公式の開設情報への導線', async () => {
   const { ctx, page } = await ctxPage();
-  await page.goto(base + 'shelters.html?hazard=earthquake', { waitUntil: 'networkidle' });
-  await page.click('#search-form button[type=submit]');
+  await page.goto(base + 'shelters.html', { waitUntil: 'networkidle' });
+  await page.click('#hz-earthquake');
   await page.waitForSelector('#results li.card');
   const pre = await page.textContent('#results-pre');
   assert.match(pre, /指定されている施設/);
-  assert.match(pre, /開設状況/);
+  assert.match(pre, /開いているかは分かりません/);
   assert.equal(await page.locator('#results-pre a[href*="congestion_situation"]').count(), 1);
   const first = await page.textContent('#results li.card');
   assert.match(first, /開設状況このデータには含まれません/);
@@ -95,8 +97,8 @@ test('照合で除外された種別の施設は結果に出ない（データ�
   const target = data.facilities.find((f) => f.supportedHazards.includes('flood') && !f.notice);
   target.excludedHazards = ['flood'];
   await page.route('**/data/shelters.json', (r) => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(data) }));
-  await page.goto(base + 'shelters.html?hazard=flood', { waitUntil: 'networkidle' });
-  await page.click('#search-form button[type=submit]');
+  await page.goto(base + 'shelters.html', { waitUntil: 'networkidle' });
+  await page.click('#hz-flood');
   await page.waitForSelector('#results li.card');
   while (await page.isVisible('#more-btn')) await page.click('#more-btn');
   const names = await page.$$eval('#results li.card h3', (hs) => hs.map((h) => h.textContent));

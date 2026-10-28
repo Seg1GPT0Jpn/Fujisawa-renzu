@@ -1,30 +1,30 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" data-page="shelters">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>避難先を探す｜ふじさわレンズ</title>
-<meta name="description" content="藤沢市の指定緊急避難場所・指定避難所を災害の種類ごとに探せます。">
+<meta name="description" content="藤沢市の指定緊急避難場所・指定避難所を、災害の種類のボタンを押すだけで現在地から近い順に探せます。">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" href="data:,">
 </head>
 <body>
-<a class="skip" href="#main">本文へ移動</a>
+<a class="skip" href="#main" data-i18n="nav.skip">本文へ移動</a>
 <header class="site">
-  <a class="brand" href="./">ふじさわレンズ</a>
-  <nav aria-label="サイト内">
+  <a class="brand" href="./" data-i18n="brand">ふじさわレンズ</a>
+  <nav aria-label="サイト内" data-i18n-attr="aria-label:nav.label">
     <ul>
-      <li><a href="shelters.html" aria-current="page">避難先</a></li>
-      <li><a href="crowding.html">開設・混雑</a></li>
-      <li><a href="environment.html">環境</a></li>
-      <li><a href="prepare.html">備え</a></li>
+      <li><a href="shelters.html" aria-current="page" data-i18n="nav.shelters">避難先</a></li>
+      <li><a href="crowding.html" data-i18n="nav.crowding">開設・混雑</a></li>
+      <li><a href="environment.html" data-i18n="nav.environment">環境</a></li>
+      <li><a href="prepare.html" data-i18n="nav.prepare">備え</a></li>
     </ul>
   </nav>
 </header>
 <main id="main">
-  <h1>避難先を探す</h1>
-  <p class="alert-line"><strong>危険が迫っているときは、近くの安全な場所（頑丈な建物の上の階など）へ。</strong>
-    <a href="https://www.city.fujisawa.kanagawa.jp/kinkyu/index.html" rel="noopener">避難情報（藤沢市）</a>・<a href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&amp;area_code=1420500" rel="noopener">警報（気象庁）</a></p>
+  <h1 data-i18n="shelters.h1">避難先を探す</h1>
+  <p class="alert-line"><strong data-i18n="shelters.alert">危険が迫っているときは、近くの安全な場所（頑丈な建物の上の階など）へ。</strong>
+    <a href="https://www.city.fujisawa.kanagawa.jp/kinkyu/index.html" rel="noopener" data-i18n="link.cityEmergency">避難情報（藤沢市）</a>・<a href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&amp;area_code=1420500" rel="noopener" data-i18n="link.jmaWarning">警報（気象庁）</a></p>
 
   <noscript>
     <div class="notice danger">
@@ -32,70 +32,69 @@
     </div>
   </noscript>
 
-  <div id="data-state" class="status-line" role="status"><p>避難先データを読み込み中…</p></div>
+  <div id="data-state" class="status-line" role="status"><p data-i18n="shelters.loading">避難先データを読み込み中…</p></div>
 
-  <form id="search-form" hidden>
-    <fieldset class="tiles" id="hazard-fieldset">
-      <legend>1. 何から避難しますか？</legend>
-      <div id="hazard-options" class="tile-grid"></div>
-      <p class="small" id="hazard-notes"></p>
-    </fieldset>
-
-    <fieldset class="plain">
-      <legend>2. 探し方</legend>
-      <button type="button" class="bigbtn" id="locate-btn">現在地から近い順に探す</button>
-      <p class="small muted">押したときだけ位置情報の許可を求めます。位置は端末内で直線距離の計算にだけ使い、送信しません。</p>
-      <div id="locate-state" role="status" aria-live="polite"></div>
-      <div class="manual">
-        <label for="query">または、施設名・住所・地区名で探す</label>
-        <input type="search" id="query" name="query" autocomplete="off" placeholder="例：辻堂、鵠沼海岸、湘南台小学校">
-        <label for="district">地区で絞り込む</label>
-        <select id="district" name="district"><option value="">すべての地区</option></select>
-        <div class="links-row"><button type="submit" class="btn primary">一覧を表示</button></div>
-      </div>
-    </fieldset>
-  </form>
+  <section id="pick" aria-labelledby="h-pick" hidden>
+    <h2 id="h-pick" class="pick-title" data-i18n="shelters.pick">何から避難しますか？</h2>
+    <p class="small" id="pick-hint" data-i18n="shelters.pickHint">ボタンを押すと、現在地から近い順にすぐ表示します。位置情報はこの端末の中で距離を計算するためだけに使い、送信しません。</p>
+    <div id="hazard-options" class="tile-grid"></div>
+    <p class="small" id="hazard-notes"></p>
+  </section>
 
   <section aria-labelledby="h-results" id="results-section" hidden>
-    <h2 id="h-results" tabindex="-1">結果</h2>
+    <h2 id="h-results" tabindex="-1" data-i18n="shelters.results">結果</h2>
     <p id="results-summary" role="status" aria-live="polite"></p>
+    <div id="locate-state" role="status" aria-live="polite"></div>
     <div id="results-pre"></div>
     <ol class="results" id="results"></ol>
-    <button type="button" class="btn" id="more-btn" hidden>さらに表示</button>
+    <button type="button" class="btn" id="more-btn" hidden data-i18n="shelters.more">さらに表示</button>
     <div id="results-post"></div>
   </section>
 
+  <details id="manual-box" class="manual-box">
+    <summary data-i18n="shelters.manualSummary">位置情報を使わずに探す（地区・施設名・住所）</summary>
+    <form id="search-form">
+      <label for="m-hazard" data-i18n="shelters.manualHazard">災害の種類</label>
+      <select id="m-hazard" name="hazard" required><option value="" data-i18n="shelters.choose">選んでください</option></select>
+      <label for="district" data-i18n="shelters.district">地区</label>
+      <select id="district" name="district"><option value="" data-i18n="shelters.allDistricts">すべての地区</option></select>
+      <label for="query" data-i18n="shelters.query">施設名・住所で絞り込む（日本語）</label>
+      <input type="search" id="query" name="query" autocomplete="off" placeholder="例：辻堂、鵠沼海岸、湘南台小学校" data-i18n-attr="placeholder:shelters.queryPlaceholder">
+      <div class="links-row"><button type="submit" class="btn primary" data-i18n="shelters.showList">一覧を表示</button></div>
+    </form>
+  </details>
+
   <section aria-labelledby="h-missing" class="small">
-    <h2 id="h-missing">このページで探せないもの</h2>
+    <h2 id="h-missing" data-i18n="shelters.missingTitle">このページで探せないもの</h2>
     <div id="missing-hazards"></div>
     <ul>
-      <li><strong>避難所が今開いているか（開設状況）</strong>：<a href="crowding.html">開設・混雑状況のページ</a>から藤沢市の公式情報へ。</li>
-      <li><strong>津波避難ビル</strong>：<a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/bosai/tunamihinanbiruichiran.html" rel="noopener">藤沢市「津波避難ビル」</a>、<a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/tsunamihinanmap.html" rel="noopener">地域ごとの津波避難マップ</a></li>
-      <li><strong>福祉避難所</strong>：<a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/siteihinannjyo.html" rel="noopener">藤沢市の避難先一覧</a>（福祉避難所の欄）</li>
+      <li><strong data-i18n="shelters.missingOpen">避難所が今開いているか（開設状況）</strong>：<a href="crowding.html" data-i18n="shelters.missingOpenLink">開設・混雑状況のページから藤沢市の公式情報へ</a></li>
+      <li><strong data-i18n="shelters.missingTsunamiBldg">津波避難ビル</strong>：<a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/bosai/tunamihinanbiruichiran.html" rel="noopener" data-i18n="link.tsunamiBldg">藤沢市「津波避難ビル」</a>、<a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/tsunamihinanmap.html" rel="noopener" data-i18n="link.tsunamiMap">地域ごとの津波避難マップ</a></li>
+      <li><strong data-i18n="shelters.missingWelfare">福祉避難所</strong>：<a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/siteihinannjyo.html" rel="noopener" data-i18n="link.cityShelterList">藤沢市の避難先一覧</a></li>
     </ul>
   </section>
 
   <section aria-labelledby="h-about" class="small">
-    <h2 id="h-about">データと地図について</h2>
+    <h2 id="h-about" data-i18n="shelters.aboutTitle">データと地図について</h2>
     <details>
-      <summary>「指定緊急避難場所」と「指定避難所」の違い</summary>
-      <p><strong>指定緊急避難場所</strong>：災害の危険から命を守るため緊急に逃げる場所。<strong>災害の種類ごと</strong>に指定されています。選んだ災害に指定されていない場所へは避難しないでください。</p>
-      <p><strong>指定避難所</strong>：危険が去るまでや、家に戻れないときに一定期間滞在する施設。緊急に逃げ込む場所とは役割が違います。</p>
+      <summary data-i18n="shelters.diffSummary">「指定緊急避難場所」と「指定避難所」の違い</summary>
+      <p data-i18n="shelters.diffEmergency">指定緊急避難場所：災害の危険から命を守るため緊急に逃げる場所。災害の種類ごとに指定されています。選んだ災害に指定されていない場所へは避難しないでください。</p>
+      <p data-i18n="shelters.diffShelter">指定避難所：危険が去るまでや、家に戻れないときに一定期間滞在する施設。緊急に逃げ込む場所とは役割が違います。</p>
     </details>
     <details>
-      <summary>距離・地図アプリ・データの出典</summary>
-      <p>距離は<strong>直線距離</strong>で、道のりの距離・所要時間・通れるかどうかは分かりません。</p>
-      <p>「地図」「経路」を押すと外部の Google マップが開きます（ページ内に地図は埋め込みません）。当サイトから現在地は送りませんが、「経路」では Google マップ側が端末の現在地を出発地に使う場合があります。災害時に経路が通れるとは限りません。</p>
-      <div id="source-info"><p>出典は読み込み後に表示します。詳しくは <a href="sources.html">出典・データの扱い</a>。</p></div>
+      <summary data-i18n="shelters.mapSummary">距離・Googleマップ・データの出典</summary>
+      <p data-i18n="shelters.mapDistance">距離は直線距離で、道のりの距離・所要時間・通れるかどうかは分かりません。</p>
+      <p data-i18n="shelters.mapGoogle">「経路」「地図」を押すと外部の Google マップ（アプリまたはサイト）が開きます。当サイトから現在地は送りませんが、経路では Google マップ側が端末の現在地を出発地に使います。災害時に経路が通れるとは限りません。</p>
+      <div id="source-info"><p><a href="sources.html" data-i18n="shelters.sourcesLink">出典・データの扱い</a></p></div>
     </details>
   </section>
 </main>
 <footer class="site">
   <ul>
-    <li><a href="sources.html">出典・データの扱い</a></li>
-    <li><a href="privacy.html">プライバシー・注意事項</a></li>
+    <li><a href="sources.html" data-i18n="footer.sources">出典・データの扱い・更新状況</a></li>
+    <li><a href="privacy.html" data-i18n="footer.privacy">プライバシー・注意事項</a></li>
   </ul>
-  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。公式発表の代わりではありません。</p>
+  <p data-i18n="footer.unofficial">ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。公式発表の代わりではありません。</p>
 </footer>
 <script type="module" src="assets/js/shelters.js"></script>
 </body>

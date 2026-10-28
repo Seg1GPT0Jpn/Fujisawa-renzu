@@ -1,4 +1,4 @@
-import { initCommon, fetchJson, el } from './common.js';
+import { initCommon, fetchJson, el, t, ready } from './common.js';
 import { loadState, saveState, clearState } from './checklist-store.js';
 
 initCommon();
@@ -33,7 +33,7 @@ function persist() {
 
 function renderStorageState() {
   $('storage-state').replaceChildren(storageOk ? '' : el('p', { class: 'notice warn small' },
-    'このブラウザでは端末に保存できないため（プライベートブラウズなど）、ページを閉じるとチェックは消えます。'));
+    t('prepare.noStorage', 'このブラウザでは端末に保存できないため（プライベートブラウズなど）、ページを閉じるとチェックは消えます。')));
 }
 
 function renderProgress() {
@@ -41,7 +41,7 @@ function renderProgress() {
   const done = ids.filter((id) => state.checked[id]).length;
   const pct = ids.length ? Math.round((done / ids.length) * 100) : 0;
   $('progress').replaceChildren(
-    el('p', {}, el('strong', {}, `${ids.length}項目中 ${done}項目を確認済み`), `（${pct}%）`),
+    el('p', {}, el('strong', {}, t('prepare.progress', '{total}項目中 {done}項目を確認済み', { total: ids.length, done })), `（${pct}%）`),
     el('div', { class: 'bar', 'aria-hidden': 'true' }, el('span', { style: `width:${pct}%` })));
   for (const s of visibleSections()) {
     const n = s.items.filter((i) => state.checked[i.id]).length;
@@ -57,7 +57,7 @@ function sourceName(id) {
 function renderSections() {
   const box = $('sections');
   box.replaceChildren(...visibleSections().map((s) => el('fieldset', { class: 'check-section', id: `sec-${s.id}` },
-    el('legend', {}, s.title, ' ', el('span', { class: 'small muted', id: `count-${s.id}` })),
+    el('legend', {}, t(`checklist.section.${s.id}`, s.title), ' ', el('span', { class: 'small muted', id: `count-${s.id}` })),
     ...s.items.map((it) => {
       const id = `chk-${it.id}`;
       const input = el('input', { type: 'checkbox', id, checked: !!state.checked[it.id] });
@@ -66,9 +66,9 @@ function renderSections() {
         persist();
       });
       return el('div', { class: 'check-item' },
-        el('label', { for: id }, input, el('span', {}, it.text, it.detail ? el('small', {}, it.detail) : '')),
-        el('p', { class: 'small muted src' }, '出典：', sourceName(it.source),
-          it.link ? [' ／ ', el('a', { href: it.link.href, rel: it.link.href.startsWith('http') ? 'noopener' : null }, it.link.text)] : ''));
+        el('label', { for: id }, input, el('span', {}, t(`checklist.item.${it.id}`, it.text), it.detail ? el('small', {}, t(`checklist.detail.${it.id}`, it.detail)) : '')),
+        el('p', { class: 'small muted src' }, t('prepare.source', '出典：'), el('span', { lang: 'ja' }, sourceName(it.source)),
+          it.link ? [' ／ ', el('a', { href: it.link.href, rel: it.link.href.startsWith('http') ? 'noopener' : null }, t(`checklist.link.${it.id}`, it.link.text))] : ''));
     }))));
   renderProgress();
 }
@@ -84,27 +84,28 @@ function renderFocus() {
       renderSections();
       persist();
     });
-    return el('label', { for: id }, input, el('span', {}, `${s.title}`, s.hint ? el('small', {}, s.hint) : ''));
+    return el('label', { for: id }, input, el('span', {}, t(`checklist.section.${s.id}`, s.title), s.hint ? el('small', {}, t(`checklist.hint.${s.id}`, s.hint)) : ''));
   }));
 }
 
 async function main() {
+  await ready;
   try {
     ({ data } = await fetchJson('data/checklist.json'));
     if (!Array.isArray(data?.sections)) throw new Error('bad');
   } catch {
-    $('progress').replaceChildren(el('p', { class: 'notice warn' }, 'チェックリストを読み込めませんでした。',
-      el('a', { href: 'https://www.kantei.go.jp/jp/content/000182715.pdf', rel: 'noopener' }, '首相官邸「災害の『備え』チェックリスト」（PDF）'), 'をご利用ください。'));
+    $('progress').replaceChildren(el('p', { class: 'notice warn' }, t('prepare.loadFailed', 'チェックリストを読み込めませんでした。'), ' ',
+      el('a', { href: 'https://www.kantei.go.jp/jp/content/000182715.pdf', rel: 'noopener' }, t('prepare.pdfLink', '首相官邸「災害の『備え』チェックリスト」（PDF）'))));
     return;
   }
   const valid = new Set([...data.hazardSections, ...data.familySections].map((s) => s.id));
   state.hazards = state.hazards.filter((h) => valid.has(h));
-  $('sources').replaceChildren(...data.sources.map((s) => el('li', {}, el('a', { href: s.url, rel: 'noopener' }, s.name))));
+  $('sources').replaceChildren(...data.sources.map((s) => el('li', {}, el('a', { href: s.url, rel: 'noopener', lang: 'ja' }, s.name))));
   renderFocus();
   renderSections();
   $('checklist').hidden = false;
   $('reset-btn').addEventListener('click', () => {
-    if (!window.confirm('この端末に保存したチェックをすべて消しますか？')) return;
+    if (!window.confirm(t('prepare.confirmReset', 'この端末に保存したチェックをすべて消しますか？'))) return;
     clearState();
     state = { checked: {}, hazards: [], total: 0, updatedAt: null };
     renderFocus();

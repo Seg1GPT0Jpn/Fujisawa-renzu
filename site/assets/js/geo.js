@@ -1,4 +1,5 @@
 // 距離計算・避難先の絞り込み（ブラウザとテストで共用する純粋関数のみ）
+import { t } from './i18n.js';
 // 位置情報はこのモジュールの外に出さない。サーバーへの送信処理は一切持たない。
 
 const EARTH_RADIUS_M = 6371008.8;
@@ -22,9 +23,9 @@ export function haversineMeters(lat1, lon1, lat2, lon2) {
 }
 
 export function formatDistance(m) {
-  if (m == null || !Number.isFinite(m)) return '距離不明';
-  if (m < 1000) return `約${Math.round(m / 10) * 10} m`;
-  return `約${(m / 1000).toFixed(1)} km`;
+  if (m == null || !Number.isFinite(m)) return t('geo.unknownDistance', '距離不明');
+  if (m < 1000) return t('geo.aboutM', '約{n} m', { n: Math.round(m / 10) * 10 });
+  return t('geo.aboutKm', '約{n} km', { n: (m / 1000).toFixed(1) });
 }
 
 // 災害種別で絞り込む。hazard が null のときは「指定避難所（滞在用）」を返す。
