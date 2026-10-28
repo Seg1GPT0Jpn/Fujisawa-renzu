@@ -237,8 +237,10 @@ test('環境情報：出典・対象期間・単位・取得日を表示し、�
   for (const id of ['landcover', 'water', 'air']) {
     const t = await page.textContent(`#${id}`);
     assert.match(t, /出典/, `${id}: 出典`);
-    assert.match(t, /対象期間/, `${id}: 対象期間`);
+    assert.match(t, /データの見方/, `${id}: データの見方`);
+    assert.match(t, /いつの？/, `${id}: 対象期間`);
     assert.match(t, /取得日/, `${id}: 取得日`);
+    assert.match(t, /判断できないこと/, `${id}: 判断できないこと`);
     assert.ok(!/読み込み中/.test(t), `${id}: 読み込み完了`);
   }
   assert.match(await page.textContent('#air'), /ppm/);
@@ -248,9 +250,10 @@ test('環境情報：出典・対象期間・単位・取得日を表示し、�
   assert.equal(zeroCells, 0);
   const all = await page.textContent('main');
   assert.ok(!/(環境|自然)が悪化した|悪化している/.test(all), '因果・悪化の断定がない');
-  assert.match(await page.textContent('#water'), /リアルタイム/);
+  assert.match(await page.textContent('#water'), /今日の水質ではありません/);
   assert.equal(pngs.length, 0, '地図画像は開くまで読み込まない');
-  await page.click('#landcover details summary >> text=分類地図');
+  await page.click('#landcover summary >> text=15分類ごとの市全体の割合と概観図');
+  await page.click('#landcover summary >> text=元の15分類の概観図');
   await page.waitForSelector('#landcover figure img');
   await page.waitForFunction(() => [...document.querySelectorAll('#landcover figure img')].every((i) => i.complete && i.naturalWidth > 0));
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

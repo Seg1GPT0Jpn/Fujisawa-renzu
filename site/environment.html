@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>藤沢の環境変化｜ふじさわレンズ</title>
-<meta name="description" content="藤沢市の土地利用・土地被覆、海水浴場の水質、大気環境の公開データを出典つきで紹介します。">
+<meta name="description" content="藤沢市の土地の使われ方（約250m四方ごと）、大気の推移、海水浴場の水質を、地図・グラフと出典つきで比較できます。">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" href="data:,">
 </head>
@@ -22,29 +22,29 @@
   </nav>
 </header>
 <main id="main">
-  <h1>藤沢の環境変化</h1>
-  <p>公開データをもとに、藤沢市の土地の使われ方や水・空気の状態をまとめています。<strong>避難の判断や健康診断の代わりにはなりません。</strong>数値の出典・対象期間・取得日・データの限界を各項目に記載しています。</p>
-  <nav aria-label="このページの項目">
-    <ul>
-      <li><a href="#landcover">土地利用・土地被覆（緑地など）の比較</a></li>
-      <li><a href="#water">海水浴場の水質</a></li>
-      <li><a href="#air">大気環境</a></li>
+  <h1>藤沢の環境変化を調べる</h1>
+  <p class="small">公開データをもとに、地図・グラフで比べられるようにしました。各項目の「データの見方」に、何を測ったデータか・いつの・どの範囲か・<strong>データから判断できないこと</strong>・出典を書いています。避難の判断や健康診断の代わりにはなりません。</p>
+  <nav aria-label="このページの項目" class="toc">
+    <ul class="entry-links">
+      <li><a href="#landcover">土地の使われ方は変わった？<small>衛星データの分類、約250m四方ごと</small></a></li>
+      <li><a href="#air">空気はきれいになっている？<small>測定局の年平均値の推移</small></a></li>
+      <li><a href="#water">海水浴場の水質は？<small>年度・検査時期・海水浴場ごとの判定</small></a></li>
     </ul>
   </nav>
 
   <section id="landcover" aria-labelledby="h-landcover">
-    <h2 id="h-landcover">土地利用・土地被覆の比較</h2>
-    <div data-dataset="landcover" role="region" aria-live="polite"><p class="muted">読み込み中…</p></div>
+    <h2 id="h-landcover">土地の使われ方（土地被覆）</h2>
+    <div id="landcover-body" aria-live="polite"><p class="muted">読み込み中…</p></div>
+  </section>
+
+  <section id="air" aria-labelledby="h-air">
+    <h2 id="h-air">大気（測定局の年平均値）</h2>
+    <div id="air-body" aria-live="polite"><p class="muted">読み込み中…</p></div>
   </section>
 
   <section id="water" aria-labelledby="h-water">
     <h2 id="h-water">海水浴場の水質</h2>
-    <div data-dataset="water-quality" role="region" aria-live="polite"><p class="muted">読み込み中…</p></div>
-  </section>
-
-  <section id="air" aria-labelledby="h-air">
-    <h2 id="h-air">大気環境</h2>
-    <div data-dataset="air-quality" role="region" aria-live="polite"><p class="muted">読み込み中…</p></div>
+    <div id="water-body" aria-live="polite"><p class="muted">読み込み中…</p></div>
   </section>
 </main>
 <footer class="site">

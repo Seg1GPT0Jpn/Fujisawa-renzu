@@ -159,3 +159,32 @@ header.site nav ul { font-size: 1rem; gap: 4px 18px; }
 .entry-links a { display: block; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; font-weight: 600; }
 .entry-links a small { display: block; font-weight: 400; color: var(--muted); }
 h1.visually-compact { font-size: 1.1rem; margin: 10px 0 4px; color: var(--muted); }
+
+/* ---- V2：環境ページ ---- */
+.about { border: 2px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin: 16px 0; background: var(--panel); }
+.about h3 { margin: 0 0 6px; }
+.about dl { margin: 0; font-size: 0.95rem; }
+.about dt { font-weight: 700; margin-top: 8px; }
+.about dd { margin: 2px 0 0; }
+.about dd ul { margin: 2px 0; padding-left: 1.2em; }
+.controls label { margin-top: 8px; }
+.controls select { min-height: 44px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.radio-list.inline { display: flex; flex-wrap: wrap; gap: 0 16px; }
+.radio-list.inline legend { width: 100%; }
+.map-wrap { margin: 8px 0; border: 1px solid var(--line); background: #ffffff; }
+svg.gridmap { display: block; width: 100%; height: auto; cursor: pointer; }
+.legend ul { list-style: none; padding: 0; margin: 4px 0; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 0.88rem; }
+.swatch { display: inline-block; width: 1.1em; height: 1.1em; margin-right: 4px; vertical-align: -0.15em; border: 1px solid #555; }
+.swatch.line { width: 1.6em; height: 0; border: 0; vertical-align: 0.25em; margin: 0 6px 0 2px; }
+.cell-info { min-height: 3em; }
+tr.hl th, tr.hl td { font-weight: 700; background: var(--panel); }
+.chart { margin: 8px 0; }
+svg.linechart { display: block; width: 100%; height: auto; color: var(--fg); }
+table.water td { text-align: center; }
+.g-aa { background: #d6ecff; color: #0b2a4a; }
+.g-a { background: #e6f2ff; color: #0b2a4a; }
+.g-b { background: #fff2cc; color: #3d2e00; }
+.g-c { background: #ffe0b3; color: #3d2400; }
+.grade-legend { list-style: none; padding: 0; }
+.grade-legend span { display: inline-block; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; font-weight: 700; }
