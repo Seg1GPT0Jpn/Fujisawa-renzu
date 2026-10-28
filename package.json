@@ -1,0 +1,19 @@
+{
+  "name": "fujisawa-lens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ふじさわレンズ：藤沢市の避難先検索と地域の環境データ（静的サイト＋小さな混雑共有API）",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "dev:api": "node scripts/dev-server.mjs --with-api",
+    "test": "node --test tests/unit/*.test.mjs",
+    "test:browser": "node --test --test-concurrency=1 tests/browser/*.test.mjs",
+    "data:shelters": "NODE_USE_ENV_PROXY=1 node scripts/fetch-shelters.mjs && node scripts/build-worker-ids.mjs && node scripts/build-status.mjs",
+    "data:status": "node scripts/build-status.mjs",
+    "measure": "node scripts/measure-size.mjs",
+    "check:links": "NODE_USE_ENV_PROXY=1 node scripts/check-links.mjs",
+    "config": "node scripts/write-config.mjs"
+  }
+}

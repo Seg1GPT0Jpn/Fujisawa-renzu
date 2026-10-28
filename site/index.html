@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ふじさわレンズ｜藤沢市の避難先と地域の環境データ</title>
+<meta name="description" content="藤沢市の災害種別ごとの避難先を探し、公式情報へすぐ移動できる軽量なホームページ。地域の環境データも紹介します。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site">
+  <a class="brand" href="./">ふじさわレンズ</a>
+  <nav aria-label="サイト内">
+    <ul>
+      <li><a href="shelters.html">避難先を探す</a></li>
+      <li><a href="crowding.html">混雑状況</a></li>
+      <li><a href="environment.html">環境の変化</a></li>
+      <li><a href="sources.html">出典・データ</a></li>
+      <li><a href="privacy.html">プライバシー・注意事項</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+  <h1>ふだんは街を知る。災害時は必要な情報にすぐたどり着く。</h1>
+
+  <section class="emergency" aria-labelledby="h-emergency">
+    <h2 id="h-emergency">災害時はこちら</h2>
+    <a class="bigbtn" href="shelters.html">災害の種類から避難先を探す</a>
+    <a class="bigbtn secondary" href="crowding.html">避難所の混雑状況</a>
+    <p><strong>避難指示・警報などは必ず公式情報を確認してください。</strong></p>
+    <ul>
+      <li><a href="https://www.city.fujisawa.kanagawa.jp/kinkyu/index.html" rel="noopener">藤沢市 緊急情報一覧</a></li>
+      <li><a href="https://bosaiinfo.city.fujisawa.kanagawa.jp/" rel="noopener">ふじさわ防災ナビ 防災インフォメーション（藤沢市）</a></li>
+      <li><a href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&amp;area_code=1420500" rel="noopener">気象庁 藤沢市の警報・注意報</a></li>
+      <li><a href="https://www.jma.go.jp/bosai/risk/" rel="noopener">気象庁 キキクル（危険度分布）</a></li>
+    </ul>
+    <p class="small">当サイトは藤沢市・気象庁などの公式発表の代わりではありません。現地の状況と避難指示を優先してください。</p>
+  </section>
+
+  <section aria-labelledby="h-env">
+    <h2 id="h-env">藤沢の環境を知る</h2>
+    <p>土地利用・緑地の変化、海水浴場の水質、大気環境など、公開データを出典つきでまとめています。</p>
+    <p><a href="environment.html">藤沢の環境変化を見る</a></p>
+  </section>
+
+  <section aria-labelledby="h-status">
+    <h2 id="h-status">データの更新状況</h2>
+    <div id="data-status"><p class="muted">読み込み中…（JavaScript が無効な場合は <a href="sources.html">出典・データ</a> を確認してください）</p></div>
+    <p class="small muted">更新は自動ではなく、保守担当者がデータ取込スクリプトを実行した時点の内容です。</p>
+  </section>
+</main>
+<footer class="site">
+  <ul>
+    <li><a href="sources.html">出典・データの扱い</a></li>
+    <li><a href="privacy.html">プライバシー・注意事項</a></li>
+  </ul>
+  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
+</footer>
+<script type="module" src="assets/js/home.js"></script>
+</body>
+</html>

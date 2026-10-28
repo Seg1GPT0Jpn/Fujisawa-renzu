@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>避難先を探す｜ふじさわレンズ</title>
+<meta name="description" content="藤沢市の指定緊急避難場所・指定避難所を災害の種類ごとに探せます。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site">
+  <a class="brand" href="./">ふじさわレンズ</a>
+  <nav aria-label="サイト内">
+    <ul>
+      <li><a href="shelters.html" aria-current="page">避難先を探す</a></li>
+      <li><a href="crowding.html">混雑状況</a></li>
+      <li><a href="environment.html">環境の変化</a></li>
+      <li><a href="sources.html">出典・データ</a></li>
+      <li><a href="privacy.html">プライバシー・注意事項</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+  <h1>避難先を探す（藤沢市）</h1>
+  <div class="notice warn">
+    <p><strong>表示される避難先は「安全の保証」ではありません。</strong>避難指示・警報、現地の状況を優先し、危険なときは近くの安全な場所（建物の上の階など）へ。</p>
+    <p class="small"><a href="https://www.city.fujisawa.kanagawa.jp/kinkyu/index.html" rel="noopener">藤沢市 緊急情報</a> ／ <a href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&amp;area_code=1420500" rel="noopener">気象庁 藤沢市の警報・注意報</a> ／ <a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/bosai/tunamihinanbiruichiran.html" rel="noopener">津波避難ビル（藤沢市）</a></p>
+  </div>
+
+  <noscript>
+    <div class="notice danger">
+      <p>この検索には JavaScript が必要です。藤沢市の公式一覧をご覧ください：<a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/siteihinannjyo.html">指定避難所・指定緊急避難場所の指定について（藤沢市）</a></p>
+    </div>
+  </noscript>
+
+  <div id="data-state" class="notice" role="status"><p>避難先データを読み込み中…</p></div>
+
+  <form id="search-form" hidden>
+    <fieldset class="radio-list" id="hazard-fieldset">
+      <legend>1. 何から避難しますか？</legend>
+      <div id="hazard-options"></div>
+    </fieldset>
+    <div id="missing-hazards"></div>
+    <details class="small">
+      <summary>「指定緊急避難場所」と「指定避難所」の違い</summary>
+      <p><strong>指定緊急避難場所</strong>：災害の危険から命を守るために緊急に逃げる場所。洪水・地震・津波など<strong>災害の種類ごとに</strong>指定されています。選んだ災害に指定されていない場所へは避難しないでください。</p>
+      <p><strong>指定避難所</strong>：危険が去るまでや、家に戻れないときに一定期間滞在する施設。緊急に逃げ込む場所とは役割が違います。</p>
+    </details>
+
+    <h2>2. 探し方を選ぶ</h2>
+    <button type="button" class="bigbtn" id="locate-btn">現在地から近い順に探す</button>
+    <p class="small muted">ボタンを押したときだけ、ブラウザが位置情報の利用許可を求めます。位置情報は端末内で距離の計算に使うだけで、当サイトのサーバーには送信・保存しません。</p>
+    <div id="locate-state" role="status" aria-live="polite"></div>
+
+    <label for="query">施設名・住所・地区名で探す（位置情報を使わない方法）</label>
+    <input type="search" id="query" name="query" autocomplete="off" placeholder="例：辻堂、鵠沼海岸、湘南台小学校">
+    <label for="district">地区から探す</label>
+    <select id="district" name="district"><option value="">すべての地区</option></select>
+    <div class="links-row"><button type="submit" class="btn primary">この条件で一覧表示</button></div>
+  </form>
+
+  <section aria-labelledby="h-results" id="results-section" hidden>
+    <h2 id="h-results" tabindex="-1">結果</h2>
+    <p id="results-summary" role="status" aria-live="polite"></p>
+    <p class="small" id="distance-note" hidden>距離は<strong>直線距離</strong>です。道路上の距離・所要時間・通行できるかどうかを示すものではありません。</p>
+    <ol class="results" id="results"></ol>
+    <button type="button" class="btn" id="more-btn" hidden>さらに表示</button>
+  </section>
+
+  <section aria-labelledby="h-maps">
+    <h2 id="h-maps">地図アプリについて</h2>
+    <p class="small">「地図で見る」「経路を開く」を押すと、外部サービスの Google マップが開きます（当サイトはページ内に地図を埋め込みません）。当サイトから現在地を Google に送ることはありませんが、「経路を開く」では Google マップ側が端末の現在地を出発地として使う場合があります。外部地図の経路が災害時に通行できるとは限りません。</p>
+  </section>
+
+  <section aria-labelledby="h-source">
+    <h2 id="h-source">このデータについて</h2>
+    <div id="source-info" class="small"><p>読み込み後に表示します。詳しくは <a href="sources.html">出典・データの扱い</a>。</p></div>
+  </section>
+</main>
+<footer class="site">
+  <ul>
+    <li><a href="sources.html">出典・データの扱い</a></li>
+    <li><a href="privacy.html">プライバシー・注意事項</a></li>
+  </ul>
+  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
+</footer>
+<script type="module" src="assets/js/shelters.js"></script>
+</body>
+</html>

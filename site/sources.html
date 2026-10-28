@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>出典・データの扱い｜ふじさわレンズ</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site">
+  <a class="brand" href="./">ふじさわレンズ</a>
+  <nav aria-label="サイト内">
+    <ul>
+      <li><a href="shelters.html">避難先を探す</a></li>
+      <li><a href="crowding.html">混雑状況</a></li>
+      <li><a href="environment.html">環境の変化</a></li>
+      <li><a href="sources.html" aria-current="page">出典・データ</a></li>
+      <li><a href="privacy.html">プライバシー・注意事項</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+  <h1>出典・データの扱い</h1>
+  <p>当サイトは公的機関が公開する情報をもとに作成しています。データは自動更新ではなく、保守担当者が取込スクリプトを実行した時点の内容です。最新・詳細の情報は各公式ページで確認してください。</p>
+
+  <h2>公式の防災情報（リアルタイムの情報はこちら）</h2>
+  <ul>
+    <li><a href="https://www.city.fujisawa.kanagawa.jp/kinkyu/index.html" rel="noopener">藤沢市 緊急情報一覧</a></li>
+    <li><a href="https://bosaiinfo.city.fujisawa.kanagawa.jp/" rel="noopener">ふじさわ防災ナビ 防災インフォメーション</a></li>
+    <li><a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/congestion_situation.html" rel="noopener">藤沢市 避難場所等の混雑状況（公式）</a></li>
+    <li><a href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&amp;area_code=1420500" rel="noopener">気象庁 藤沢市の警報・注意報</a></li>
+    <li><a href="https://www.jma.go.jp/bosai/risk/" rel="noopener">気象庁 キキクル（危険度分布）</a></li>
+    <li><a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/bosai/tunamihinanbiruichiran.html" rel="noopener">藤沢市 津波避難ビル</a></li>
+    <li><a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/tsunamihinanmap.html" rel="noopener">藤沢市 地域ごとの津波避難マップ（片瀬・鵠沼・辻堂地区）</a></li>
+  </ul>
+
+  <h2 id="shelters">避難先（指定緊急避難場所・指定避難所）</h2>
+  <dl class="small">
+    <dt><strong>配信データの出典</strong></dt>
+    <dd><a href="https://www.gsi.go.jp/bousaichiri/hinanbasho.html" rel="noopener">国土地理院「指定緊急避難場所・指定避難所データ」</a>（地理院タイル：指定緊急避難場所 skhb01〜08、指定一般避難所 sih）。市町村が登録したデータです。</dd>
+    <dt><strong>利用条件</strong></dt>
+    <dd><a href="https://www.gsi.go.jp/kikakuchousei/kikakuchousei40182.html" rel="noopener">国土地理院コンテンツ利用規約</a>（公共データ利用規約 第1.0版（PDL1.0）を適用。出典の記載と、加工した場合はその旨の記載が必要）および <a href="https://www.gsi.go.jp/bousaichiri/hinanbasho-menseki.html" rel="noopener">免責事項・ご利用上の注意</a>。<br>出典：「指定緊急避難場所・指定避難所データ」（国土地理院）（https://www.gsi.go.jp/bousaichiri/hinanbasho.html）をもとにふじさわレンズ作成（藤沢市分の抽出、項目の整理、藤沢市ページとの照合結果・休止告知の付加）。国土地理院が作成したものではありません。</dd>
+    <dt><strong>照合に使用（転載なし）</strong></dt>
+    <dd><a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/siteihinannjyo.html" rel="noopener">藤沢市「指定避難所・指定緊急避難場所の指定について」</a>。指定内容が一致するかの確認、地区名、休止告知の確認に使い、市ページの文章・表は転載していません。不一致の施設には画面で「要確認」と表示します。</dd>
+    <dt><strong>取得日・更新</strong></dt>
+    <dd>取得日は避難先ページに表示します。施設ごとの公式の更新日は国土地理院タイルに含まれないため「不明」と表示します。</dd>
+    <dt><strong>限界</strong></dt>
+    <dd>
+      <ul>
+        <li>高潮の指定緊急避難場所は、藤沢市が指定していますが国土地理院データに藤沢市分が登録されていないため検索できません。<a href="https://www.city.fujisawa.kanagawa.jp/documents/20769/siteikinnkyu_takasio.pdf" rel="noopener">藤沢市「指定緊急避難場所（高潮）指定先一覧」（PDF）</a>を確認してください。</li>
+        <li>福祉避難所は国土地理院データに藤沢市分がないため掲載していません。津波避難ビルも掲載していません（上の公式リンク参照）。</li>
+        <li>座標は敷地・建物の正確な位置を示さない場合があります。住所から座標を推測することはしていません。</li>
+        <li>避難所が実際に開設されているかどうか（開設状況）は含みません。</li>
+      </ul>
+    </dd>
+    <dt><strong>参考（未使用）</strong></dt>
+    <dd><a href="https://www.pref.kanagawa.jp/docs/j8g/bousai/1_7748_9_8.html" rel="noopener">神奈川県「指定緊急避難場所・指定避難所について」</a>のCSVは座標を含まず、二次利用条件が明示されていないため配信データには使っていません。</dd>
+  </dl>
+
+  <h2 id="environment">環境データ</h2>
+  <div id="env-sources" class="small">
+    <p>各データの出典・対象期間・取得日・利用条件・加工内容は <a href="environment.html">藤沢の環境変化</a> の各項目にも表示しています。</p>
+  </div>
+
+  <h2>地図アプリ</h2>
+  <p class="small"><a href="https://developers.google.com/maps/documentation/urls/get-started?hl=ja" rel="noopener">Google Maps URLs</a>（APIキー不要の公式URL形式）で、利用者が押したときだけ外部の Google マップを開きます。</p>
+
+  <h2>アクセシビリティ</h2>
+  <p class="small"><a href="https://www.digital.go.jp/accessibility-statement" rel="noopener">デジタル庁のウェブアクセシビリティ方針</a>を参考に、WCAG 2.2 AA 相当を目標にしています（第三者による適合検証は未実施です）。</p>
+</main>
+<footer class="site">
+  <ul>
+    <li><a href="sources.html">出典・データの扱い</a></li>
+    <li><a href="privacy.html">プライバシー・注意事項</a></li>
+  </ul>
+  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
+</footer>
+<script type="module" src="assets/js/common-init.js"></script>
+</body>
+</html>

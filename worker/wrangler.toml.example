@@ -1,0 +1,29 @@
+# 混雑共有API（Cloudflare Workers + D1）の設定例。
+# このファイルを wrangler.toml にコピーして使う（wrangler.toml は .gitignore 済み）。
+# アカウント作成・D1 作成・デプロイは利用者自身が行う（README「混雑共有APIのデプロイ」参照）。
+name = "fujisawa-lens-crowding"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# 運用ログ：既定ではリクエストログを永続化しない。有効化する場合はプライバシー説明を更新すること。
+[observability]
+enabled = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "fujisawa-lens-crowding"
+database_id = "<wrangler d1 create の出力値をここに貼る>"
+
+[vars]
+# 静的サイトの公開URL（カンマ区切りで複数可）。これ以外の Origin からの投稿は拒否する。
+ALLOWED_ORIGINS = "https://example.github.io"
+REPORT_WINDOW_MINUTES = "30"
+MIN_REPORTS_FOR_SUMMARY = "3"
+PER_FACILITY_COOLDOWN_MINUTES = "10"
+PER_CLIENT_HOURLY_LIMIT = "10"
+GLOBAL_PER_FACILITY_PER_MINUTE = "30"
+RETENTION_HOURS = "24"
+# RATE_LIMIT_SECRET は vars に書かず `wrangler secret put RATE_LIMIT_SECRET` で設定する
+
+[triggers]
+crons = ["*/30 * * * *"]

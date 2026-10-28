@@ -1,0 +1,13 @@
+{
+  "description": "公式ページで告知された休止等を手作業で反映するファイル。追加・削除時は必ず sourceUrl と確認日を記録すること。告知の文面は転載せず、要旨を自分の言葉で書く。",
+  "notices": [
+    {
+      "nameIncludes": "藤沢市民会館",
+      "type": "suspended",
+      "since": "2026-10-01",
+      "text": "藤沢市の告知によると、再整備に伴う解体工事のため2026年10月1日から指定避難所・指定緊急避難場所として利用できません（大規模火災時の周辺敷地への避難の扱いは市のページを確認してください）。",
+      "sourceUrl": "https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/siteihinannjyo.html",
+      "checkedAt": "2026-10-28"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>藤沢の環境変化｜ふじさわレンズ</title>
+<meta name="description" content="藤沢市の土地利用・土地被覆、海水浴場の水質、大気環境の公開データを出典つきで紹介します。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site">
+  <a class="brand" href="./">ふじさわレンズ</a>
+  <nav aria-label="サイト内">
+    <ul>
+      <li><a href="shelters.html">避難先を探す</a></li>
+      <li><a href="crowding.html">混雑状況</a></li>
+      <li><a href="environment.html" aria-current="page">環境の変化</a></li>
+      <li><a href="sources.html">出典・データ</a></li>
+      <li><a href="privacy.html">プライバシー・注意事項</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+  <h1>藤沢の環境変化</h1>
+  <p>公開データをもとに、藤沢市の土地の使われ方や水・空気の状態をまとめています。<strong>避難の判断や健康診断の代わりにはなりません。</strong>数値の出典・対象期間・取得日・データの限界を各項目に記載しています。</p>
+  <nav aria-label="このページの項目">
+    <ul>
+      <li><a href="#landcover">土地利用・土地被覆（緑地など）の比較</a></li>
+      <li><a href="#water">海水浴場の水質</a></li>
+      <li><a href="#air">大気環境</a></li>
+    </ul>
+  </nav>
+
+  <section id="landcover" aria-labelledby="h-landcover">
+    <h2 id="h-landcover">土地利用・土地被覆の比較</h2>
+    <div data-dataset="landcover" role="region" aria-live="polite"><p class="muted">読み込み中…</p></div>
+  </section>
+
+  <section id="water" aria-labelledby="h-water">
+    <h2 id="h-water">海水浴場の水質</h2>
+    <div data-dataset="water-quality" role="region" aria-live="polite"><p class="muted">読み込み中…</p></div>
+  </section>
+
+  <section id="air" aria-labelledby="h-air">
+    <h2 id="h-air">大気環境</h2>
+    <div data-dataset="air-quality" role="region" aria-live="polite"><p class="muted">読み込み中…</p></div>
+  </section>
+</main>
+<footer class="site">
+  <ul>
+    <li><a href="sources.html">出典・データの扱い</a></li>
+    <li><a href="privacy.html">プライバシー・注意事項</a></li>
+  </ul>
+  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
+</footer>
+<script type="module" src="assets/js/environment.js"></script>
+</body>
+</html>

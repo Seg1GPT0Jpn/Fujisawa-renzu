@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>避難所の混雑状況｜ふじさわレンズ</title>
+<meta name="description" content="藤沢市の避難所の混雑状況。公式の開設・混雑情報への案内と、利用者による匿名の混雑報告。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site">
+  <a class="brand" href="./">ふじさわレンズ</a>
+  <nav aria-label="サイト内">
+    <ul>
+      <li><a href="shelters.html">避難先を探す</a></li>
+      <li><a href="crowding.html" aria-current="page">混雑状況</a></li>
+      <li><a href="environment.html">環境の変化</a></li>
+      <li><a href="sources.html">出典・データ</a></li>
+      <li><a href="privacy.html">プライバシー・注意事項</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+  <h1>避難所の混雑状況</h1>
+
+  <section class="notice ok" aria-labelledby="h-official">
+    <h2 id="h-official">まず公式の開設・混雑状況を確認</h2>
+    <p>藤沢市は株式会社バカンとの協定により、避難場所等の開設・混雑状況（「空いています」「やや混雑」「混雑」「利用停止中」）を地図で公開しています。</p>
+    <ul>
+      <li><a href="https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/congestion_situation.html" rel="noopener">藤沢市「避難場所等の混雑状況がマップ上で確認できます！」</a></li>
+      <li><a href="https://bosaiinfo.city.fujisawa.kanagawa.jp/" rel="noopener">ふじさわ防災ナビ 防災インフォメーション</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-user">
+    <h2 id="h-user">利用者からの混雑報告（参考情報）</h2>
+    <div class="notice warn">
+      <p><strong>ここに表示されるのは、ログイン不要で誰でも送れる「利用者からの報告」です。</strong>市の公式な開設状況・収容人数ではありません。誤った報告やいたずらが含まれる可能性があります。</p>
+      <p class="small">直近 <span id="window-min">30</span> 分以内の報告だけを集計し、それより古い報告は表示しません。報告が少ないときは「情報不足」と表示し、混雑度を判断しません。</p>
+    </div>
+
+    <div id="api-state" role="status"><p>確認中…</p></div>
+
+    <div id="crowding-ui" hidden>
+      <label for="facility">施設を選ぶ</label>
+      <select id="facility"><option value="">選択してください</option></select>
+      <div id="facility-summary" aria-live="polite"></div>
+
+      <form id="report-form" hidden>
+        <fieldset class="radio-list">
+          <legend>いまの混雑を報告する</legend>
+          <div id="level-options"></div>
+        </fieldset>
+        <p class="small muted">送信するのは「施設」と「混雑区分」だけです。氏名・メールアドレス・位置情報は送りません。</p>
+        <button type="submit" class="btn primary" id="report-submit">報告を送信</button>
+        <div id="report-result" role="status" aria-live="polite"></div>
+      </form>
+
+      <h3>報告がある施設（直近）</h3>
+      <div id="recent-list"><p class="muted small">読み込み中…</p></div>
+      <p class="small muted" id="fetched-at"></p>
+      <button type="button" class="btn" id="reload-btn">最新の報告を再読み込み</button>
+    </div>
+  </section>
+</main>
+<footer class="site">
+  <ul>
+    <li><a href="sources.html">出典・データの扱い</a></li>
+    <li><a href="privacy.html">プライバシー・注意事項</a></li>
+  </ul>
+  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
+</footer>
+<script src="config.js"></script>
+<script type="module" src="assets/js/crowding.js"></script>
+</body>
+</html>
