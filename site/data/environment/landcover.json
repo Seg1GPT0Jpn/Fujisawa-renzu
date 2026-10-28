@@ -1,0 +1,491 @@
+{
+ "status": "ok",
+ "generatedAt": "2026-10-28T20:40:18+09:00",
+ "source": {
+  "name": "JAXA 高解像度土地利用土地被覆図（日本域）ver.25.04（HRLULC Japan v25.04）",
+  "url": "https://www.eorc.jaxa.jp/ALOS/jp/dataset/lulc_j.htm",
+  "productUrl": "https://www.eorc.jaxa.jp/ALOS/jp/dataset/lulc/lulc_v2504_j.htm",
+  "distributionUrl": "https://s3.ap-northeast-1.wasabisys.com/je-pds/cog/v1/JAXA.EORC_ALOS_HRLULC.v25.04_japan/collection.json",
+  "distributionNote": "ダウンロードはJAXA Earth API（JAXA EORC運営）のSTAC/COG配信を利用（ユーザー登録不要）。EORCの原版GeoTIFF（1/12000度）はユーザー登録が必要なため使用していない。",
+  "termsUrl": "https://earth.jaxa.jp/ja/data/policy/",
+  "termsSummary": "JAXA第一宇宙技術部門「研究データ等の利用条件」: 出所表示を条件に改変・第三者配布を含め無償で自由に利用可。二次的著作物の公表時もJAXAが原初データの配布者である旨の表示が必要。商用目的の利用は事前にJAXAへ連絡が必要。JAXAは品質・利用結果に責任を負わない。",
+  "attribution": "提供：高解像度土地利用土地被覆図 ver.25.04（JAXA）。藤沢市域で集計・加工して作成。",
+  "doi": "10.57746/EO.01kkfxamy0sngbwgn5ezsn90cw"
+ },
+ "boundary": {
+  "name": "国土数値情報 行政区域データ（N03）2025年1月1日時点 神奈川県 — 藤沢市（コード14205）",
+  "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html",
+  "license": "CC BY 4.0（出典：国土交通省 国土数値情報（行政区域データ）を加工して作成）",
+  "polygons": 193,
+  "note": "海岸線で区切られた陸域ポリゴン（江の島などの島を含む）。JGD2011とWGS84の差は本集計では無視。"
+ },
+ "method": [
+  "JAXA Earth APIのCOG（最上位レベル4、0.1度タイル）を藤沢市の外接範囲でモザイク。",
+  "画素中心が行政区域ポリゴン内にある画素を市内とみなした（境界上の画素は中心位置で判定）。",
+  "各画素の面積はWGS84楕円体上の緯度経度セル面積で計算し、カテゴリ別に合計。",
+  "pctは市内の分類済み画素の合計面積（欠測=0値を除く）に対する割合。"
+ ],
+ "classes": [
+  {
+   "code": 1,
+   "nameJa": "水域",
+   "nameEn": "Water bodies",
+   "color": "#000064"
+  },
+  {
+   "code": 2,
+   "nameJa": "人工構造物",
+   "nameEn": "Built-up",
+   "color": "#ff0000"
+  },
+  {
+   "code": 3,
+   "nameJa": "水田",
+   "nameEn": "Paddy field",
+   "color": "#0080ff"
+  },
+  {
+   "code": 4,
+   "nameJa": "畑地",
+   "nameEn": "Cropland",
+   "color": "#ffc1bf"
+  },
+  {
+   "code": 5,
+   "nameJa": "草地",
+   "nameEn": "Grassland",
+   "color": "#ffff00"
+  },
+  {
+   "code": 6,
+   "nameJa": "落葉広葉樹林",
+   "nameEn": "DBF (Deciduous broad-leaf forest)",
+   "color": "#80ff00"
+  },
+  {
+   "code": 7,
+   "nameJa": "落葉針葉樹林",
+   "nameEn": "DNF (Deciduous needle-leaf forest)",
+   "color": "#00ff80"
+  },
+  {
+   "code": 8,
+   "nameJa": "常緑広葉樹林",
+   "nameEn": "EBF (Evergreen broad-leaf forest)",
+   "color": "#56ac00"
+  },
+  {
+   "code": 9,
+   "nameJa": "常緑針葉樹林",
+   "nameEn": "ENF (Evergreen needle-leaf forest)",
+   "color": "#00ac56"
+  },
+  {
+   "code": 10,
+   "nameJa": "裸地",
+   "nameEn": "Bare",
+   "color": "#806400"
+  },
+  {
+   "code": 11,
+   "nameJa": "竹林",
+   "nameEn": "Bamboo_forest",
+   "color": "#d9f005"
+  },
+  {
+   "code": 12,
+   "nameJa": "ソーラーパネル",
+   "nameEn": "Solar_panel",
+   "color": "#a12977"
+  },
+  {
+   "code": 13,
+   "nameJa": "湿地",
+   "nameEn": "Wetland",
+   "color": "#0096a0"
+  },
+  {
+   "code": 14,
+   "nameJa": "農業用温室",
+   "nameEn": "Greenhouse",
+   "color": "#ffffff"
+  },
+  {
+   "code": 15,
+   "nameJa": "岩礁・干潟",
+   "nameEn": "Rock reef and Tidal flat",
+   "color": "#74cee3"
+  }
+ ],
+ "versions": [
+  {
+   "version": "2020JPN_v25.04",
+   "productVersion": "25.04",
+   "targetPeriod": "2020年（観測年。2か月毎コンポジットの年間時系列から分類）",
+   "resolutionM": null,
+   "resolutionNote": "配信COGの画素サイズ 0.40秒（1/9000度、藤沢付近で東西約10.1m×南北約12.3m）。原版GeoTIFFは1/12000度（約10m）。",
+   "retrievedAt": "2026-10-28",
+   "cityTotalKm2": 69.563,
+   "noDataKm2": 0.0,
+   "classes": [
+    {
+     "code": 1,
+     "pixels": 1506,
+     "areaKm2": 0.188,
+     "pct": 0.27
+    },
+    {
+     "code": 2,
+     "pixels": 413550,
+     "areaKm2": 51.48,
+     "pct": 74.0
+    },
+    {
+     "code": 3,
+     "pixels": 10346,
+     "areaKm2": 1.288,
+     "pct": 1.85
+    },
+    {
+     "code": 4,
+     "pixels": 46709,
+     "areaKm2": 5.812,
+     "pct": 8.36
+    },
+    {
+     "code": 5,
+     "pixels": 19786,
+     "areaKm2": 2.463,
+     "pct": 3.54
+    },
+    {
+     "code": 6,
+     "pixels": 16002,
+     "areaKm2": 1.992,
+     "pct": 2.86
+    },
+    {
+     "code": 7,
+     "pixels": 173,
+     "areaKm2": 0.022,
+     "pct": 0.03
+    },
+    {
+     "code": 8,
+     "pixels": 5964,
+     "areaKm2": 0.742,
+     "pct": 1.07
+    },
+    {
+     "code": 9,
+     "pixels": 7310,
+     "areaKm2": 0.91,
+     "pct": 1.31
+    },
+    {
+     "code": 10,
+     "pixels": 8777,
+     "areaKm2": 1.093,
+     "pct": 1.57
+    },
+    {
+     "code": 11,
+     "pixels": 13699,
+     "areaKm2": 1.705,
+     "pct": 2.45
+    },
+    {
+     "code": 12,
+     "pixels": 704,
+     "areaKm2": 0.088,
+     "pct": 0.13
+    },
+    {
+     "code": 13,
+     "pixels": 6855,
+     "areaKm2": 0.853,
+     "pct": 1.23
+    },
+    {
+     "code": 14,
+     "pixels": 7345,
+     "areaKm2": 0.914,
+     "pct": 1.31
+    },
+    {
+     "code": 15,
+     "pixels": 121,
+     "areaKm2": 0.015,
+     "pct": 0.02
+    }
+   ],
+   "map": {
+    "file": "landcover-2020.png",
+    "downsample": "4×4画素の多数決",
+    "widthPx": 277,
+    "heightPx": 299,
+    "pixelAspectHW": 1.222,
+    "bboxLonLat": [
+     139.393983,
+     35.296433,
+     139.516872,
+     35.4291
+    ]
+   },
+   "notes": [
+    "JAXA公表の全国全体精度: 94.49%（独立検証点による。藤沢市内の精度ではない）。"
+   ]
+  },
+  {
+   "version": "2022JPN_v25.04",
+   "productVersion": "25.04",
+   "targetPeriod": "2022年（観測年。2か月毎コンポジットの年間時系列から分類）",
+   "resolutionM": null,
+   "resolutionNote": "配信COGの画素サイズ 0.40秒（1/9000度、藤沢付近で東西約10.1m×南北約12.3m）。原版GeoTIFFは1/12000度（約10m）。",
+   "retrievedAt": "2026-10-28",
+   "cityTotalKm2": 69.563,
+   "noDataKm2": 0.0,
+   "classes": [
+    {
+     "code": 1,
+     "pixels": 1823,
+     "areaKm2": 0.227,
+     "pct": 0.33
+    },
+    {
+     "code": 2,
+     "pixels": 413198,
+     "areaKm2": 51.436,
+     "pct": 73.94
+    },
+    {
+     "code": 3,
+     "pixels": 10492,
+     "areaKm2": 1.306,
+     "pct": 1.88
+    },
+    {
+     "code": 4,
+     "pixels": 46235,
+     "areaKm2": 5.754,
+     "pct": 8.27
+    },
+    {
+     "code": 5,
+     "pixels": 13858,
+     "areaKm2": 1.725,
+     "pct": 2.48
+    },
+    {
+     "code": 6,
+     "pixels": 15969,
+     "areaKm2": 1.988,
+     "pct": 2.86
+    },
+    {
+     "code": 7,
+     "pixels": 9,
+     "areaKm2": 0.001,
+     "pct": 0.0
+    },
+    {
+     "code": 8,
+     "pixels": 5411,
+     "areaKm2": 0.674,
+     "pct": 0.97
+    },
+    {
+     "code": 9,
+     "pixels": 5767,
+     "areaKm2": 0.718,
+     "pct": 1.03
+    },
+    {
+     "code": 10,
+     "pixels": 7376,
+     "areaKm2": 0.918,
+     "pct": 1.32
+    },
+    {
+     "code": 11,
+     "pixels": 20163,
+     "areaKm2": 2.51,
+     "pct": 3.61
+    },
+    {
+     "code": 12,
+     "pixels": 647,
+     "areaKm2": 0.081,
+     "pct": 0.12
+    },
+    {
+     "code": 13,
+     "pixels": 10867,
+     "areaKm2": 1.352,
+     "pct": 1.94
+    },
+    {
+     "code": 14,
+     "pixels": 6790,
+     "areaKm2": 0.845,
+     "pct": 1.21
+    },
+    {
+     "code": 15,
+     "pixels": 242,
+     "areaKm2": 0.03,
+     "pct": 0.04
+    }
+   ],
+   "map": {
+    "file": "landcover-2022.png",
+    "downsample": "4×4画素の多数決",
+    "widthPx": 277,
+    "heightPx": 299,
+    "pixelAspectHW": 1.222,
+    "bboxLonLat": [
+     139.393983,
+     35.296433,
+     139.516872,
+     35.4291
+    ]
+   },
+   "notes": [
+    "2022年版は2022JPN_v23.12の分類結果に「岩礁・干潟」を追加し、2020年と2024年が同じカテゴリの画素を2022年もそのカテゴリにそろえる「はさみうち処理」（畑地・水田・裸地・農業用温室を除く）を行ったもの（JAXA説明より）。",
+    "JAXA公表の全国全体精度: 95.53%（独立検証点による。藤沢市内の精度ではない。JAXAの注記では2022年の値は2022JPN_v23.12の精度検証結果）。"
+   ]
+  },
+  {
+   "version": "2024JPN_v25.04",
+   "productVersion": "25.04",
+   "targetPeriod": "2024年（観測年。2か月毎コンポジットの年間時系列から分類）",
+   "resolutionM": null,
+   "resolutionNote": "配信COGの画素サイズ 0.40秒（1/9000度、藤沢付近で東西約10.1m×南北約12.3m）。原版GeoTIFFは1/12000度（約10m）。",
+   "retrievedAt": "2026-10-28",
+   "cityTotalKm2": 69.563,
+   "noDataKm2": 0.0,
+   "classes": [
+    {
+     "code": 1,
+     "pixels": 2084,
+     "areaKm2": 0.26,
+     "pct": 0.37
+    },
+    {
+     "code": 2,
+     "pixels": 403276,
+     "areaKm2": 50.201,
+     "pct": 72.17
+    },
+    {
+     "code": 3,
+     "pixels": 12196,
+     "areaKm2": 1.518,
+     "pct": 2.18
+    },
+    {
+     "code": 4,
+     "pixels": 55254,
+     "areaKm2": 6.876,
+     "pct": 9.88
+    },
+    {
+     "code": 5,
+     "pixels": 17937,
+     "areaKm2": 2.233,
+     "pct": 3.21
+    },
+    {
+     "code": 6,
+     "pixels": 14801,
+     "areaKm2": 1.842,
+     "pct": 2.65
+    },
+    {
+     "code": 7,
+     "pixels": 56,
+     "areaKm2": 0.007,
+     "pct": 0.01
+    },
+    {
+     "code": 8,
+     "pixels": 5826,
+     "areaKm2": 0.725,
+     "pct": 1.04
+    },
+    {
+     "code": 9,
+     "pixels": 6391,
+     "areaKm2": 0.796,
+     "pct": 1.14
+    },
+    {
+     "code": 10,
+     "pixels": 6814,
+     "areaKm2": 0.848,
+     "pct": 1.22
+    },
+    {
+     "code": 11,
+     "pixels": 19579,
+     "areaKm2": 2.437,
+     "pct": 3.5
+    },
+    {
+     "code": 12,
+     "pixels": 662,
+     "areaKm2": 0.082,
+     "pct": 0.12
+    },
+    {
+     "code": 13,
+     "pixels": 9121,
+     "areaKm2": 1.135,
+     "pct": 1.63
+    },
+    {
+     "code": 14,
+     "pixels": 4732,
+     "areaKm2": 0.589,
+     "pct": 0.85
+    },
+    {
+     "code": 15,
+     "pixels": 118,
+     "areaKm2": 0.015,
+     "pct": 0.02
+    }
+   ],
+   "map": {
+    "file": "landcover-2024.png",
+    "downsample": "4×4画素の多数決",
+    "widthPx": 277,
+    "heightPx": 299,
+    "pixelAspectHW": 1.222,
+    "bboxLonLat": [
+     139.393983,
+     35.296433,
+     139.516872,
+     35.4291
+    ]
+   },
+   "notes": [
+    "JAXA公表の全国全体精度: 92.99%（独立検証点による。藤沢市内の精度ではない）。"
+   ]
+  }
+ ],
+ "limitations": [
+  "衛星画像の自動分類（深層学習）による推定図であり、個々の場所の実際の土地利用を保証するものではない。誤分類を含む。",
+  "公表されている全体精度は日本全域の検証点に基づく値で、藤沢市内・カテゴリ別の精度は示されていない。",
+  "画素は約10mで、狭い道路・小規模な緑地・住宅の庭などは周囲のカテゴリに含まれることがある。",
+  "二毛作・果樹園・茶畑などのカテゴリは定義されておらず、実情と異なる場合がある（JAXA注記）。",
+  "年間の時系列画像から分類しており、特定の季節の状態ではない。",
+  "年ごとの面積差には実際の変化だけでなく分類のゆらぎが含まれる。数値差をそのまま『増えた・減った』『環境が良く/悪くなった』と評価しないこと。",
+  "3時期とも同一バージョン（v25.04）だが、2022年版の作り方は2020・2024年版と一部異なる（v23.12結果＋後処理）。",
+  "旧バージョン（v21.11・v23.12など）とはカテゴリ数・手法が異なり、本データには含めていない（比較不可）。",
+  "使用したのはJAXA Earth APIの配信版（1/9000度格子、最頻値リサンプリング）で、原版（1/12000度）から直接集計した値とはわずかに異なりうる。",
+  "市域の面積（cityTotalKm2）は画素面積の合計であり、国土地理院『全国都道府県市区町村別面積調』の公式面積と一致するとは限らない。",
+  "面積が0.1km²未満のカテゴリ（例：落葉針葉樹林・岩礁・干潟・ソーラーパネル）は誤分類の影響を受けやすく、存在の有無や増減の判断には使わないこと。",
+  "地図画像は緯度経度格子のままの粗い（約40〜50m相当）概観図。表示時は縦横比を map.pixelAspectHW で補正すること。"
+ ]
+}

@@ -61,7 +61,24 @@
 
   <h2 id="environment">環境データ</h2>
   <div id="env-sources" class="small">
-    <p>各データの出典・対象期間・取得日・利用条件・加工内容は <a href="environment.html">藤沢の環境変化</a> の各項目にも表示しています。</p>
+    <p>各データの出典・対象期間・取得日・利用条件・加工内容は <a href="environment.html">藤沢の環境変化</a> の各項目にも表示しています。元のデータファイル（衛星画像・PDF等）は当サイトに同梱せず、集計・抜粋した軽量なデータだけを配信しています。いずれも取得日は2026年10月28日、自動更新ではありません。</p>
+    <h3>土地利用・土地被覆</h3>
+    <ul>
+      <li>出典：<a href="https://www.eorc.jaxa.jp/ALOS/jp/dataset/lulc/lulc_v2504_j.htm" rel="noopener">JAXA 高解像度土地利用土地被覆図（日本域）ver.25.04</a>（2020・2022・2024年）。取得は JAXA Earth API の配信版（登録不要）。</li>
+      <li>利用条件：<a href="https://earth.jaxa.jp/ja/data/policy/" rel="noopener">JAXA「研究データ等の利用条件」</a>（出所表示を条件に改変・第三者配布を含めて無償利用可。商用利用の場合はJAXAへの事前連絡が必要）。表記：「提供：高解像度土地利用土地被覆図 ver.25.04（JAXA）。藤沢市域で集計・加工して作成。」</li>
+      <li>市域の境界：<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html" rel="noopener">国土数値情報 行政区域データ（N03、2025年1月1日時点）</a>（CC BY 4.0。出典：国土交通省 国土数値情報（行政区域データ）を加工して作成）。</li>
+      <li>旧バージョン（ver.21.11・23.12など）は登録制の配布のみのため未取得で、比較していません。地区別の集計は、公式の地区境界データがないため行っていません。</li>
+    </ul>
+    <h3>海水浴場の水質</h3>
+    <ul>
+      <li>出典：神奈川県 記者発表資料「海水浴場の水質検査の結果について」（2024〜2026年度、各年度2回。<a href="https://www.pref.kanagawa.jp/docs/e8z/prs/r2533039.html" rel="noopener">最新：令和8年度第2回</a>）。</li>
+      <li>利用条件：<a href="https://www.pref.kanagawa.jp/master/sitepolicy.html" rel="noopener">神奈川県サイトポリシー</a>（引用など著作権法上認められる範囲で利用可、出典の記載が必要。明示的なオープンライセンスはありません）。当サイトは判定区分などの事実のみを出典つきで抜粋しています。</li>
+    </ul>
+    <h3>大気環境</h3>
+    <ul>
+      <li>出典：<a href="https://www.pref.kanagawa.jp/docs/b4f/taikiosen/2024taiki.html" rel="noopener">神奈川県環境科学センター『神奈川の大気汚染』2024年度版</a>（2015〜2024年度の年平均値）、神奈川県「大気環境の状況について」資料1（2025年度）。藤沢市の案内：<a href="https://www.city.fujisawa.kanagawa.jp/khozen/machizukuri/kankyo/kogai/taiki/datatekyo.html" rel="noopener">大気汚染常時監視データの提供</a>。</li>
+      <li>利用条件：神奈川県サイトポリシー（同上）。公表された年平均値を出典つきで抜粋し、再計算はしていません。</li>
+    </ul>
   </div>
 
   <h2>地図アプリ</h2>

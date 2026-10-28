@@ -1,0 +1,540 @@
+{
+ "status": "ok",
+ "generatedAt": "2026-10-28T20:39:36+09:00",
+ "retrievedAt": "2026-10-28",
+ "period": "2024年度〜2026年度（県の記者発表一覧で取得できた範囲）",
+ "frequency": "毎年度2回（シーズン前の5〜6月頃、シーズン中の7月頃）。各回、期間内の2日間・1日2回採水。",
+ "source": {
+  "name": "神奈川県 記者発表資料「海水浴場の水質検査の結果について」（健康医療局生活衛生部生活衛生課）",
+  "releases": [
+   {
+    "title": "海水浴場の水質検査（令和6年度第1回）の結果について",
+    "url": "https://www.pref.kanagawa.jp/docs/e8z/prs/r9739336.html",
+    "published": "2024-06-06",
+    "pdfs": [
+     "https://www.pref.kanagawa.jp/documents/110351/01researchmethod.pdf",
+     "https://www.pref.kanagawa.jp/documents/110351/02mapdata.pdf",
+     "https://www.pref.kanagawa.jp/documents/110351/03openingstatus.pdf"
+    ]
+   },
+   {
+    "title": "海水浴場の水質検査（令和6年度第2回）の結果について",
+    "url": "https://www.pref.kanagawa.jp/docs/e8z/prs/r3796875.html",
+    "published": "2024-08-05",
+    "pdfs": [
+     "https://www.pref.kanagawa.jp/documents/112218/siryou1.pdf",
+     "https://www.pref.kanagawa.jp/documents/112218/siryou2.pdf",
+     "https://www.pref.kanagawa.jp/documents/112218/siryou3.pdf"
+    ]
+   },
+   {
+    "title": "海水浴場の水質検査（令和7年度第1回）の結果について",
+    "url": "https://www.pref.kanagawa.jp/docs/e8z/prs/r9316902.html",
+    "published": "2025-06-12",
+    "pdfs": [
+     "https://www.pref.kanagawa.jp/documents/121181/01_researchmethod_r7-1.pdf",
+     "https://www.pref.kanagawa.jp/documents/121181/02_mapdata_r7-1.pdf",
+     "https://www.pref.kanagawa.jp/documents/121181/03_openingstatus_r7-1.pdf"
+    ]
+   },
+   {
+    "title": "海水浴場の水質検査（令和7年度第2回）の結果について",
+    "url": "https://www.pref.kanagawa.jp/docs/e8z/prs/r0334244.html",
+    "published": "2025-08-06",
+    "pdfs": [
+     "https://www.pref.kanagawa.jp/documents/122809/01_researchmethod.pdf",
+     "https://www.pref.kanagawa.jp/documents/122809/02_mapdata.pdf",
+     "https://www.pref.kanagawa.jp/documents/122809/03_openingstatus.pdf"
+    ]
+   },
+   {
+    "title": "海水浴場の水質検査（令和8年度第1回）の結果について",
+    "url": "https://www.pref.kanagawa.jp/docs/e8z/prs/r8580442.html",
+    "published": "2026-06-19",
+    "pdfs": [
+     "https://www.pref.kanagawa.jp/documents/134810/01_researchmethod.pdf",
+     "https://www.pref.kanagawa.jp/documents/134810/02_mapdata.pdf",
+     "https://www.pref.kanagawa.jp/documents/134810/03_openingstatus.pdf"
+    ]
+   },
+   {
+    "title": "海水浴場の水質検査（令和8年度第2回）の結果について",
+    "url": "https://www.pref.kanagawa.jp/docs/e8z/prs/r2533039.html",
+    "published": "2026-08-14",
+    "pdfs": [
+     "https://www.pref.kanagawa.jp/documents/137683/01_researchmethod.pdf",
+     "https://www.pref.kanagawa.jp/documents/137683/02_mapdata.pdf",
+     "https://www.pref.kanagawa.jp/documents/137683/03_data.pdf"
+    ]
+   }
+  ],
+  "termsUrl": "https://www.pref.kanagawa.jp/master/sitepolicy.html",
+  "termsSummary": "神奈川県サイトポリシー: 掲載コンテンツは著作権の対象で、『引用』等の著作権法上認められる範囲で自由に利用可、利用時は出典を記載。明示的なオープンデータライセンス（CC BY等）は付されていない。本JSONは海水浴場名・判定・採水期間などの事実情報のみを抜き出し、出典URLを付している。",
+  "attribution": "出典：神奈川県『海水浴場の水質検査の結果について』（記者発表資料）"
+ },
+ "criteria": {
+  "basis": "環境省の定める水浴場水質判定基準",
+  "items": [
+   "ふん便性大腸菌群数",
+   "油膜の有無",
+   "COD（化学的酸素要求量）",
+   "透明度"
+  ],
+  "classes": [
+   {
+    "judgement": "適",
+    "grade": "水質AA",
+    "fecalColiform": "不検出（検出下限2個/100mL）",
+    "oilFilm": "油膜が認められない",
+    "cod": "2mg/L以下",
+    "transparency": "全透（1m以上）"
+   },
+   {
+    "judgement": "適",
+    "grade": "水質A",
+    "fecalColiform": "100個/100mL以下",
+    "oilFilm": "油膜が認められない",
+    "cod": "2mg/L以下",
+    "transparency": "全透（1m以上）"
+   },
+   {
+    "judgement": "可",
+    "grade": "水質B",
+    "fecalColiform": "400個/100mL以下",
+    "oilFilm": "常時は油膜が認められない",
+    "cod": "5mg/L以下",
+    "transparency": "1m未満〜50cm以上"
+   },
+   {
+    "judgement": "可",
+    "grade": "水質C",
+    "fecalColiform": "1,000個/100mL以下",
+    "oilFilm": "常時は油膜が認められない",
+    "cod": "8mg/L以下",
+    "transparency": "1m未満〜50cm以上"
+   },
+   {
+    "judgement": "不適",
+    "grade": null,
+    "fecalColiform": "1,000個/100mLを超える",
+    "oilFilm": "常時油膜が認められる",
+    "cod": "8mg/L超",
+    "transparency": "50cm未満"
+   }
+  ],
+  "o157": "腸管出血性大腸菌O157の有無も併せて検査。",
+  "sourceNote": "判定基準は各回の資料1『調査方法等』の表による。"
+ },
+ "records": [
+  {
+   "fiscalYear": 2024,
+   "fiscalYearJa": "令和6年度",
+   "beach": "片瀬東浜",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2024-05-08",
+    "periodTo": "2024-05-16",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "適",
+   "grade": "水質A",
+   "judgementText": "適（水質A）",
+   "o157": "不検出",
+   "openingPeriod": null,
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r9739336.html"
+  },
+  {
+   "fiscalYear": 2024,
+   "fiscalYearJa": "令和6年度",
+   "beach": "片瀬東浜",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2024-07-02",
+    "periodTo": "2024-07-05",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": null,
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r3796875.html"
+  },
+  {
+   "fiscalYear": 2024,
+   "fiscalYearJa": "令和6年度",
+   "beach": "片瀬西浜・鵠沼",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2024-05-08",
+    "periodTo": "2024-05-16",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "適",
+   "grade": "水質A",
+   "judgementText": "適（水質A）",
+   "o157": "不検出",
+   "openingPeriod": null,
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r9739336.html"
+  },
+  {
+   "fiscalYear": 2024,
+   "fiscalYearJa": "令和6年度",
+   "beach": "片瀬西浜・鵠沼",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2024-07-02",
+    "periodTo": "2024-07-05",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": null,
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r3796875.html"
+  },
+  {
+   "fiscalYear": 2024,
+   "fiscalYearJa": "令和6年度",
+   "beach": "辻堂",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2024-05-08",
+    "periodTo": "2024-05-16",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "適",
+   "grade": "水質A",
+   "judgementText": "適（水質A）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2024-07-13",
+    "to": "2024-08-31"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r9739336.html"
+  },
+  {
+   "fiscalYear": 2024,
+   "fiscalYearJa": "令和6年度",
+   "beach": "辻堂",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2024-07-02",
+    "periodTo": "2024-07-05",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "適",
+   "grade": "水質A",
+   "judgementText": "適（水質A）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2024-07-13",
+    "to": "2024-08-31"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r3796875.html"
+  },
+  {
+   "fiscalYear": 2025,
+   "fiscalYearJa": "令和7年度",
+   "beach": "片瀬東浜",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2025-05-07",
+    "periodTo": "2025-05-22",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2025-07-01",
+    "to": "2025-08-31"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r9316902.html"
+  },
+  {
+   "fiscalYear": 2025,
+   "fiscalYearJa": "令和7年度",
+   "beach": "片瀬東浜",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2025-07-01",
+    "periodTo": "2025-07-07",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2025-07-01",
+    "to": "2025-08-31"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r0334244.html"
+  },
+  {
+   "fiscalYear": 2025,
+   "fiscalYearJa": "令和7年度",
+   "beach": "片瀬西浜・鵠沼",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2025-05-07",
+    "periodTo": "2025-05-22",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2025-07-01",
+    "to": "2025-09-07"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r9316902.html"
+  },
+  {
+   "fiscalYear": 2025,
+   "fiscalYearJa": "令和7年度",
+   "beach": "片瀬西浜・鵠沼",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2025-07-01",
+    "periodTo": "2025-07-07",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2025-07-01",
+    "to": "2025-09-07"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r0334244.html"
+  },
+  {
+   "fiscalYear": 2025,
+   "fiscalYearJa": "令和7年度",
+   "beach": "辻堂",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2025-05-07",
+    "periodTo": "2025-05-22",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2025-07-12",
+    "to": "2025-08-31"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r9316902.html"
+  },
+  {
+   "fiscalYear": 2025,
+   "fiscalYearJa": "令和7年度",
+   "beach": "辻堂",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2025-07-01",
+    "periodTo": "2025-07-07",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2025-07-12",
+    "to": "2025-08-31"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r0334244.html"
+  },
+  {
+   "fiscalYear": 2026,
+   "fiscalYearJa": "令和8年度",
+   "beach": "片瀬東浜",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2026-05-11",
+    "periodTo": "2026-06-02",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2026-07-01",
+    "to": "2026-09-06"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r8580442.html"
+  },
+  {
+   "fiscalYear": 2026,
+   "fiscalYearJa": "令和8年度",
+   "beach": "片瀬東浜",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2026-07-06",
+    "periodTo": "2026-07-09",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2026-07-01",
+    "to": "2026-09-06"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r2533039.html"
+  },
+  {
+   "fiscalYear": 2026,
+   "fiscalYearJa": "令和8年度",
+   "beach": "片瀬西浜・鵠沼",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2026-05-11",
+    "periodTo": "2026-06-02",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2026-07-01",
+    "to": "2026-09-13"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r8580442.html"
+  },
+  {
+   "fiscalYear": 2026,
+   "fiscalYearJa": "令和8年度",
+   "beach": "片瀬西浜・鵠沼",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2026-07-06",
+    "periodTo": "2026-07-09",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2026-07-01",
+    "to": "2026-09-13"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r2533039.html"
+  },
+  {
+   "fiscalYear": 2026,
+   "fiscalYearJa": "令和8年度",
+   "beach": "辻堂",
+   "round": 1,
+   "roundLabel": "シーズン前",
+   "testDates": {
+    "periodFrom": "2026-05-11",
+    "periodTo": "2026-06-02",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2026-07-18",
+    "to": "2026-08-31"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r8580442.html"
+  },
+  {
+   "fiscalYear": 2026,
+   "fiscalYearJa": "令和8年度",
+   "beach": "辻堂",
+   "round": 2,
+   "roundLabel": "シーズン中",
+   "testDates": {
+    "periodFrom": "2026-07-06",
+    "periodTo": "2026-07-09",
+    "days": 2,
+    "samplesPerDay": 2,
+    "note": "この期間のうち2日間、1日につき2回採水（県全体の記述。海水浴場ごとの採水日は公表資料に記載なし）"
+   },
+   "judgement": "可",
+   "grade": "水質B",
+   "judgementText": "可（水質B）",
+   "o157": "不検出",
+   "openingPeriod": {
+    "from": "2026-07-18",
+    "to": "2026-08-31"
+   },
+   "sourceUrl": "https://www.pref.kanagawa.jp/docs/e8z/prs/r2533039.html"
+  }
+ ],
+ "notes": [
+  "『適』『可』はいずれも水浴に適した水質。『可』（水質B・C）は『適』に比べふん便性大腸菌群数などの基準が緩い区分で、遊泳禁止を意味しない。",
+  "判定は年2回・各2日間の採水に基づくもので、その日以外（雨の後など）の水質を保証しない。",
+  "O157は『全ての海水浴場において検出されなかった』という県の発表文からの記載。海水浴場別の表は公表されていない。",
+  "採水日は県全体の期間で、海水浴場ごとの採水日は公表資料に記載がない。",
+  "開設期間は資料3の記載（PDFから読み取れた場合のみ）。実際の開設状況は藤沢市・各海水浴場の案内を確認のこと。",
+  "測定値（大腸菌群数・COD等）は記者発表資料に掲載されておらず、判定区分のみを収録。"
+ ]
+}

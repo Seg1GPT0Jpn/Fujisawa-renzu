@@ -139,14 +139,20 @@ function showMore() {
   $('more-btn').hidden = current.shown >= current.items.length;
 }
 
-function showResults(items, summary, { withDistance, extraNote } = {}) {
-  current = { items, shown: 0, withDistance };
+function showResults(items, summary, { withDistance, extraNote, hazard = null } = {}) {
+  current = { items, shown: 0, withDistance, hazard };
   $('results-section').hidden = false;
   $('results').replaceChildren();
   $('distance-note').hidden = !withDistance;
   const s = $('results-summary');
   s.replaceChildren(summary);
   if (extraNote) s.append(el('br'), extraNote);
+  if (current.hazard === 'tsunami') {
+    s.append(el('span', { class: 'notice warn small', style: 'display:block' },
+      '津波のときは、この一覧（指定緊急避難場所）のほか「津波避難ビル」も避難先になります。津波避難ビルはこのサイトのデータに含まれていません：',
+      el('a', { href: 'https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/bosai/tunamihinanbiruichiran.html', rel: 'noopener' }, '藤沢市「津波避難ビル」'),
+      '。揺れを感じたら、できるだけ早く高い場所へ。'));
+  }
   if (items.length === 0) {
     $('results').append(el('li', { class: 'notice warn' },
       el('p', {}, 'この条件に該当する公式の指定先は見つかりませんでした。別の種類の施設を代わりに案内することはしません。'),
@@ -185,7 +191,7 @@ function onLocate() {
     state.replaceChildren(el('p', { class: 'small' }, `現在地を取得しました（精度 約${Math.round(pos.coords.accuracy)} m）。`));
     const items = withDistance.concat(noCoordinates.map((f) => ({ facility: f, distanceM: null })));
     showResults(items, `${modeLabel(m)}：近い順に ${items.length} 件`, {
-      withDistance: true,
+      withDistance: true, hazard: m.hazard,
       extraNote: far != null && far > 20000 ? el('strong', {}, '現在地が藤沢市から離れているようです。このサイトは藤沢市の避難先のみを扱います。') : null,
     });
   }, (err) => {
@@ -208,7 +214,7 @@ function onManualSearch(ev) {
   if (d) pool = pool.filter((f) => f.district === d);
   if (q) pool = searchFacilities(pool, q);
   const cond = [q && `「${q}」`, d && `${d}地区`].filter(Boolean).join('・') || 'すべて';
-  showResults(pool.map((f) => ({ facility: f, distanceM: null })), `${modeLabel(m)}：${cond} ${pool.length} 件（住所順）`);
+  showResults(pool.map((f) => ({ facility: f, distanceM: null })), `${modeLabel(m)}：${cond} ${pool.length} 件（住所順）`, { hazard: m.hazard });
 }
 
 async function main() {

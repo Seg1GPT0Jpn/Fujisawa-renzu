@@ -47,7 +47,7 @@ worker/                  混雑共有API（Cloudflare Workers + D1）
 tests/unit, tests/browser 自動テスト
 ```
 
-必要なもの：Node.js 20 以上（依存パッケージなし）。ブラウザテストと通信量計測には Playwright（Chromium）が必要です。
+必要なもの：Node.js 20 以上（依存パッケージなし）。ブラウザテストと通信量計測には Playwright（Chromium）が必要です。環境データの再作成には Python 3 が必要です（`scripts/env/run_all.sh` が `.cache/env/venv` に numpy・rasterio・shapely・pyshp・pdfplumber を入れます）。
 
 ## ローカルで起動
 

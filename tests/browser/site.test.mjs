@@ -227,3 +227,43 @@ test('キーボードだけで避難先を検索できる', async () => {
   assert.equal(await page.evaluate(() => document.activeElement.id), 'h-results', '結果見出しへフォーカス移動');
   await ctx.close();
 });
+
+test('環境情報：出典・対象期間・単位・取得日を表示し、欠測を0にせず、環境悪化と断定しない', async () => {
+  const ctx = await browser.newContext({ viewport: { width: 360, height: 740 }, serviceWorkers: 'block' });
+  const page = await ctx.newPage();
+  const pngs = [];
+  page.on('request', (r) => { if (r.url().endsWith('.png')) pngs.push(r.url()); });
+  await page.goto(base + 'environment.html', { waitUntil: 'networkidle' });
+  for (const id of ['landcover', 'water', 'air']) {
+    const t = await page.textContent(`#${id}`);
+    assert.match(t, /出典/, `${id}: 出典`);
+    assert.match(t, /対象期間/, `${id}: 対象期間`);
+    assert.match(t, /取得日/, `${id}: 取得日`);
+    assert.ok(!/読み込み中/.test(t), `${id}: 読み込み完了`);
+  }
+  assert.match(await page.textContent('#air'), /ppm/);
+  assert.match(await page.textContent('#air'), /欠測等/);
+  // 欠測（null）のセルが 0 表示になっていない
+  const zeroCells = await page.$$eval('#air td.num', (tds) => tds.filter((td) => /^0(\.0+)?$/.test(td.textContent.trim())).length);
+  assert.equal(zeroCells, 0);
+  const all = await page.textContent('main');
+  assert.ok(!/(環境|自然)が悪化した|悪化している/.test(all), '因果・悪化の断定がない');
+  assert.match(await page.textContent('#water'), /リアルタイム/);
+  assert.equal(pngs.length, 0, '地図画像は開くまで読み込まない');
+  await page.click('#landcover details summary >> text=分類地図');
+  await page.waitForSelector('#landcover figure img');
+  await page.waitForFunction(() => [...document.querySelectorAll('#landcover figure img')].every((i) => i.complete && i.naturalWidth > 0));
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  assert.ok(overflow <= 0);
+  await ctx.close();
+});
+
+test('環境データ取得失敗時は数値を出さずに失敗を表示', async () => {
+  const ctx = await browser.newContext({ serviceWorkers: 'block' });
+  const page = await ctx.newPage();
+  await page.route('**/data/environment/air-quality.json', (r) => r.fulfill({ status: 404, body: '' }));
+  await page.goto(base + 'environment.html', { waitUntil: 'networkidle' });
+  assert.match(await page.textContent('#air'), /取得できませんでした/);
+  assert.equal(await page.locator('#air table').count(), 0);
+  await ctx.close();
+});
