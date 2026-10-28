@@ -82,11 +82,11 @@ test('現在地から探す：許可時は近い順、選んだ災害種別の�
   assert.match(text, /津波/);
   const distances = await page.$$eval('#results .distance', (els) => els.map((e) => e.textContent));
   assert.ok(distances.length > 0);
-  assert.ok(distances.every((d) => d.includes('直線距離')));
+  assert.ok(distances.every((d) => d.includes('直線')));
   const tags = await page.$$eval('#results li.card', (els) => els.map((e) => e.textContent));
   assert.ok(tags.every((t) => t.includes('津波')), '津波に対応しない施設が混ざっていない');
   assert.ok(!(await page.textContent('#results')).includes('藤沢市民会館'), '休止中の施設を出さない');
-  assert.ok(await page.isVisible('#distance-note'));
+  assert.match(await page.textContent('#results-summary'), /直線距離です/);
   const mapHref = await page.getAttribute('#results li.card a.btn >> nth=1', 'href');
   assert.match(mapHref, /^https:\/\/www\.google\.com\/maps\/dir\/\?api=1/);
   assert.ok(!mapHref.includes('35.3389'), '現在地をURLに含めない');

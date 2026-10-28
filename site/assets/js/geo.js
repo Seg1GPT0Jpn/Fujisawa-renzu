@@ -34,11 +34,23 @@ export function filterFacilities(facilities, { hazard = null, mode = 'emergency'
   return facilities.filter((f) => {
     if (!f || typeof f !== 'object') return false;
     if (f.notice && f.notice.type === 'suspended') return false;
-    if (mode === 'shelter') return Array.isArray(f.facilityTypes) && f.facilityTypes.includes('指定避難所');
+    if (mode === 'shelter') {
+      return Array.isArray(f.facilityTypes) && f.facilityTypes.includes('指定避難所') &&
+        !(Array.isArray(f.excludedTypes) && f.excludedTypes.includes('指定避難所'));
+    }
     if (!hazard) return false;
+    // 公式一覧との照合で確認できなかった種別（excludedHazards）は推奨しない
+    if (Array.isArray(f.excludedHazards) && f.excludedHazards.includes(hazard)) return false;
     return Array.isArray(f.facilityTypes) && f.facilityTypes.includes('指定緊急避難場所') &&
       Array.isArray(f.supportedHazards) && f.supportedHazards.includes(hazard);
   });
+}
+
+// 市の一覧のみで指定が確認できる施設（推奨はしない。名前と公式一覧への案内だけに使う）
+export function cityOnlyFacilities(facilities, hazard) {
+  if (!Array.isArray(facilities) || !hazard) return [];
+  return facilities.filter((f) => f && !(f.notice && f.notice.type === 'suspended') &&
+    Array.isArray(f.cityOnlyHazards) && f.cityOnlyHazards.some((c) => c.hazards.includes(hazard)));
 }
 
 // 近い順に並べる。座標のない施設は距離計算に使わず、別リストとして返す。

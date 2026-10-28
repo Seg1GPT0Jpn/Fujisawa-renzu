@@ -104,9 +104,10 @@ function buildLevelOptions() {
 async function main() {
   const state = $('api-state');
   if (!cfg.crowdingApiBase) {
-    state.replaceChildren(el('div', { class: 'notice' },
-      el('p', {}, el('strong', { text: '混雑共有は準備中です。' }), ' 報告を保存するサーバーがまだ設定されていないため、報告の送信・表示は行っていません。'),
-      el('p', { class: 'small' }, '公式の開設・混雑状況は上のリンクから確認してください。')));
+    // 未設定の機能を使えるように見せない：見出しごと小さな1行にする
+    const section = $('user-reports');
+    section.replaceChildren(el('p', { class: 'small muted', id: 'api-state' },
+      '利用者どうしで混雑を報告し合う機能は準備中のため、現在は利用できません（報告の送信・表示は行っていません）。'));
     return;
   }
   try {

@@ -13,17 +13,20 @@
   <a class="brand" href="./">ふじさわレンズ</a>
   <nav aria-label="サイト内">
     <ul>
-      <li><a href="shelters.html">避難先を探す</a></li>
-      <li><a href="crowding.html">混雑状況</a></li>
-      <li><a href="environment.html">環境の変化</a></li>
-      <li><a href="sources.html" aria-current="page">出典・データ</a></li>
-      <li><a href="privacy.html">プライバシー・注意事項</a></li>
+      <li><a href="shelters.html">避難先</a></li>
+      <li><a href="crowding.html">開設・混雑</a></li>
+      <li><a href="environment.html">環境</a></li>
+      <li><a href="prepare.html">備え</a></li>
     </ul>
   </nav>
 </header>
 <main id="main">
   <h1>出典・データの扱い</h1>
   <p>当サイトは公的機関が公開する情報をもとに作成しています。データは自動更新ではなく、保守担当者が取込スクリプトを実行した時点の内容です。最新・詳細の情報は各公式ページで確認してください。</p>
+
+  <h2 id="status">データの更新状況</h2>
+  <div id="data-status"><p class="muted">読み込み中…</p></div>
+  <p class="small muted">更新は自動ではなく、保守担当者がデータ取込スクリプトを実行した時点の内容です。</p>
 
   <h2>公式の防災情報（リアルタイムの情報はこちら）</h2>
   <ul>
@@ -89,11 +92,11 @@
 </main>
 <footer class="site">
   <ul>
-    <li><a href="sources.html">出典・データの扱い</a></li>
+    <li><a href="sources.html">出典・データの扱い・更新状況</a></li>
     <li><a href="privacy.html">プライバシー・注意事項</a></li>
   </ul>
   <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
 </footer>
-<script type="module" src="assets/js/common-init.js"></script>
+<script type="module" src="assets/js/sources.js"></script>
 </body>
 </html>

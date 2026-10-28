@@ -85,3 +85,62 @@ test('検証：重複ID・他市の住所・空データを検出', () => {
   assert.ok(validateShelterData(null).errors.length);
   assert.ok(validateShelterData({ facilities: [{ ...ok, latitude: 35.3, longitude: null }] }, { minFacilities: 1 }).errors.length);
 });
+
+// ---- V2：災害種別ごとの照合 ----
+function setup(gsiProps, cityCells, { shelter = true, extraHead = '', extraCell = '' } = {}) {
+  const rowCells = cityCells.map((c) => `<td>${c ? '〇' : '&nbsp;'}</td>`).join('');
+  const html = `<table><caption>辻堂地区　避難先一覧</caption><tbody>
+<tr><td>名称</td><td>所在地</td><td colspan="5">指定緊急避難場所</td><td>指定避難所</td><td>福祉避難所</td></tr>
+<tr><td>地震</td><td>火山現象</td><td>洪水・崖崩れ</td><td>大規模火災</td><td>津波</td>${extraHead}</tr>
+<tr><td>A小学校</td><td>辻堂1-1</td>${rowCells}${extraCell}<td>${shelter ? '〇' : ''}</td><td></td></tr></tbody></table>`;
+  const { facilities } = mergeGsiFeatures({
+    emergencyLayers: [{ features: [pt('A小学校', '神奈川県藤沢市辻堂1-1', 139.45, 35.32, gsiProps)] }],
+    shelterLayer: { features: [pt('A小学校', '神奈川県藤沢市辻堂1-1', 139.45, 35.32)] },
+  });
+  crossCheckWithCity(facilities, parseCityTable(html));
+  return facilities[0];
+}
+
+test('国土地理院のみ指定ありの種別は除外（gsi_only）', () => {
+  // 列：地震, 火山, 洪水・崖崩れ, 大規模火災, 津波
+  const f = setup({ disaster4: 1, disaster5: 1 }, [true, false, false, false, false]);
+  assert.equal(f.hazardChecks.earthquake, 'match');
+  assert.equal(f.hazardChecks.tsunami, 'gsi_only');
+  assert.deepEqual(f.excludedHazards, ['tsunami']);
+  assert.equal(f.cityPageCheck.status, 'mismatch');
+});
+
+test('市のみ指定ありの種別は推奨せず cityOnlyHazards に記録', () => {
+  const f = setup({ disaster4: 1 }, [true, false, false, false, true]);
+  assert.equal(f.hazardChecks.tsunami, 'city_only');
+  assert.deepEqual(f.cityOnlyHazards, [{ hazards: ['tsunami'], label: '津波' }]);
+  assert.ok(!f.supportedHazards.includes('tsunami'));
+  // 洪水・崖崩れ列：国土地理院に洪水も崖崩れもなければ両方 city_only
+  const g = setup({ disaster4: 1 }, [true, false, true, false, false]);
+  assert.deepEqual(g.cityOnlyHazards[0].hazards.sort(), ['flood', 'landslide']);
+  // どちらか一方があれば city_only にしない
+  const h = setup({ disaster1: 1, disaster4: 1 }, [true, false, true, false, false]);
+  assert.equal(h.hazardChecks.flood, 'match');
+  assert.deepEqual(h.cityOnlyHazards, []);
+});
+
+test('市の一覧に列がない種別（内水氾濫）は no_city_column として残す', () => {
+  const f = setup({ disaster4: 1, disaster7: 1 }, [true, false, false, false, false]);
+  assert.equal(f.hazardChecks.inland_flood, 'no_city_column');
+  assert.ok(!f.excludedHazards.includes('inland_flood'));
+});
+
+test('市の一覧で指定避難所でない場合は滞在用の検索から除外', () => {
+  const f = setup({ disaster4: 1 }, [true, false, false, false, false], { shelter: false });
+  assert.deepEqual(f.excludedTypes, ['指定避難所']);
+});
+
+test('市の一覧に見つからない施設は全種別を除外（not_listed）', () => {
+  const { facilities } = mergeGsiFeatures({
+    emergencyLayers: [{ features: [pt('Z会館', '神奈川県藤沢市辻堂9-9', 139.45, 35.32, { disaster1: 1, disaster4: 1 })] }],
+    shelterLayer: { features: [] },
+  });
+  crossCheckWithCity(facilities, parseCityTable(cityHtml()));
+  assert.equal(facilities[0].cityPageCheck.status, 'not_listed');
+  assert.deepEqual(facilities[0].excludedHazards.sort(), ['earthquake', 'flood']);
+});

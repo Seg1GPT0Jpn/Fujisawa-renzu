@@ -87,3 +87,18 @@ test('距離の表示', () => {
   assert.equal(formatDistance(123), '約120 m');
   assert.equal(formatDistance(4321), '約4.3 km');
 });
+
+test('照合で除外された種別・種類は結果に出ない', async () => {
+  const { cityOnlyFacilities } = await import('../../site/assets/js/geo.js');
+  const list = [
+    F({ id: 'a', supportedHazards: ['flood', 'earthquake'], excludedHazards: ['flood'] }),
+    F({ id: 'b', supportedHazards: ['flood'] }),
+    F({ id: 'c', facilityTypes: ['指定緊急避難場所', '指定避難所'], excludedTypes: ['指定避難所'] }),
+    F({ id: 'd', supportedHazards: ['earthquake'], cityOnlyHazards: [{ hazards: ['tsunami'], label: '津波' }] }),
+  ];
+  assert.deepEqual(filterFacilities(list, { hazard: 'flood' }).map((f) => f.id), ['b']);
+  assert.deepEqual(filterFacilities(list, { hazard: 'earthquake' }).map((f) => f.id), ['a', 'd']);
+  assert.deepEqual(filterFacilities(list, { mode: 'shelter' }).map((f) => f.id), []);
+  assert.deepEqual(filterFacilities(list, { hazard: 'tsunami' }).map((f) => f.id), [], '市のみ指定は推奨しない');
+  assert.deepEqual(cityOnlyFacilities(list, 'tsunami').map((f) => f.id), ['d']);
+});

@@ -183,43 +183,85 @@ export function matchCityRow(row, facilities) {
   return byName.length === 1 ? byName[0] : null;
 }
 
-// 市ページの表と国土地理院データの指定内容を比較する
+// 災害種別（国土地理院）と市ページの列の対応。市ページに列がない種別は null
+export const CITY_COLUMN_FOR_HAZARD = {
+  flood: 'floodOrLandslide', landslide: 'floodOrLandslide', storm_surge: 'stormSurge',
+  earthquake: 'earthquake', tsunami: 'tsunami', large_fire: 'largeFire', inland_flood: null, volcano: 'volcano',
+};
+const CITY_COLUMN_LABEL = {
+  floodOrLandslide: '洪水・崖崩れ', stormSurge: '高潮', earthquake: '地震', tsunami: '津波', largeFire: '大規模火災', volcano: '火山現象',
+};
+
+// 市ページの表と国土地理院データの指定内容を、災害種別ごとに比較する。
+//   match           両方で指定あり
+//   gsi_only        国土地理院のみ指定あり（市の一覧では指定なし）→ その種別の検索対象から除外
+//   city_only       市の一覧のみ指定あり → 推奨には使わず「公式一覧で確認」として名前だけ案内
+//   no_city_column  市の一覧に該当する列がない（例：内水氾濫）→ 国土地理院の指定を使い、その旨を表示
+//   not_listed      施設が市の一覧に見つからない → 指定内容を確認できないため検索対象から除外
 export function crossCheckWithCity(facilities, cityRows) {
-  const checked = new Map();
+  const cityFlags = new Map();
   const unmatchedCityRows = [];
   const suspendedOnCity = [];
   const cityStormSurge = [];
   const gsiHasStormSurge = facilities.some((f) => f.supportedHazards.includes('storm_surge'));
   for (const row of cityRows) {
+    if (row.stormSurge) cityStormSurge.push(row.name);
     const f = matchCityRow(row, facilities);
     if (!f) { unmatchedCityRows.push(row); continue; }
     if (row.suspendedOnCityPage) suspendedOnCity.push(f);
-    const has = (k) => f.supportedHazards.includes(k);
-    const mismatches = [];
-    const cmp = (label, city, gsi) => { if (city !== gsi) mismatches.push(`${label}（市:${city ? '〇' : '－'} / 国土地理院:${gsi ? '〇' : '－'}）`); };
-    cmp('地震', row.earthquake, has('earthquake'));
-    cmp('火山現象', row.volcano, has('volcano'));
-    cmp('洪水・崖崩れ', row.floodOrLandslide, has('flood') || has('landslide'));
-    cmp('大規模火災', row.largeFire, has('large_fire'));
-    cmp('津波', row.tsunami, has('tsunami'));
-    // 高潮：国土地理院データに藤沢市の高潮指定が登録されていない場合は施設ごとの不一致にせず、全体の注意として扱う
-    if (row.stormSurge !== null && gsiHasStormSurge) cmp('高潮', row.stormSurge, has('storm_surge'));
-    if (row.stormSurge) cityStormSurge.push(row.name);
-    cmp('指定避難所', row.shelter, f.facilityTypes.includes('指定避難所'));
-    const prev = checked.get(f.id);
-    if (prev) prev.mismatches.push(...mismatches);
-    else checked.set(f.id, { status: mismatches.length ? 'mismatch' : 'match', mismatches, district: row.district, welfare: row.welfare });
-    if (mismatches.length) checked.get(f.id).status = 'mismatch';
+    // 同じ施設に複数行が対応する場合は「いずれかの行で指定あり」とする
+    const prev = cityFlags.get(f.id) ?? { district: row.district };
+    for (const col of [...Object.keys(CITY_COLUMN_LABEL), 'shelter']) {
+      if (row[col] === null || row[col] === undefined) continue;
+      prev[col] = Boolean(prev[col]) || Boolean(row[col]);
+    }
+    cityFlags.set(f.id, prev);
   }
+
   for (const f of facilities) {
-    const c = checked.get(f.id);
-    if (c) {
-      f.district = c.district || null;
-      f.cityPageCheck = { status: c.status, mismatches: c.mismatches };
-    } else {
+    const c = cityFlags.get(f.id);
+    const hazardChecks = {};
+    const excludedHazards = [];
+    const cityOnly = [];
+    const mismatches = [];
+    if (!c) {
+      for (const h of f.supportedHazards) { hazardChecks[h] = 'not_listed'; excludedHazards.push(h); }
       f.district = null;
       f.cityPageCheck = { status: 'not_listed', mismatches: [] };
+    } else {
+      f.district = c.district || null;
+      for (const h of HAZARDS) {
+        const gsi = f.supportedHazards.includes(h.key);
+        const col = CITY_COLUMN_FOR_HAZARD[h.key];
+        const city = col ? c[col] : undefined;
+        if (col === 'stormSurge' && !gsiHasStormSurge) continue; // 高潮は全体の注意として扱う
+        if (city === undefined) { if (gsi) hazardChecks[h.key] = 'no_city_column'; continue; }
+        if (gsi && city) hazardChecks[h.key] = 'match';
+        else if (gsi && !city) {
+          hazardChecks[h.key] = 'gsi_only'; excludedHazards.push(h.key);
+          mismatches.push(`${h.label}（市の一覧：指定なし／国土地理院：指定あり）→ この災害の検索結果から除外`);
+        }
+      }
+      // 市のみ指定あり（列単位で判定。洪水・崖崩れは国土地理院の洪水・崖崩れのどちらもない場合）
+      for (const [col, label] of Object.entries(CITY_COLUMN_LABEL)) {
+        if (!c[col]) continue;
+        if (col === 'stormSurge' && !gsiHasStormSurge) continue;
+        const keys = Object.entries(CITY_COLUMN_FOR_HAZARD).filter(([, v]) => v === col).map(([k]) => k);
+        if (keys.some((k) => f.supportedHazards.includes(k))) continue;
+        for (const k of keys) hazardChecks[k] = 'city_only';
+        cityOnly.push({ hazards: keys, label });
+        mismatches.push(`${label}（市の一覧：指定あり／国土地理院：指定なし）→ 当サイトでは推奨せず、市の一覧で確認`);
+      }
+      if (f.facilityTypes.includes('指定避難所') && c.shelter === false) {
+        mismatches.push('指定避難所（市の一覧：指定なし／国土地理院：指定あり）→ 指定避難所の検索結果から除外');
+        f.excludedTypes = ['指定避難所'];
+      }
+      f.cityPageCheck = { status: mismatches.length ? 'mismatch' : 'match', mismatches };
     }
+    f.hazardChecks = hazardChecks;
+    f.excludedHazards = excludedHazards;
+    f.cityOnlyHazards = cityOnly;
+    if (!f.excludedTypes) f.excludedTypes = [];
   }
   return { unmatchedCityRows, suspendedOnCity, cityStormSurge, gsiHasStormSurge };
 }

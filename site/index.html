@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ふじさわレンズ｜藤沢市の避難先と地域の環境データ</title>
-<meta name="description" content="藤沢市の災害種別ごとの避難先を探し、公式情報へすぐ移動できる軽量なホームページ。地域の環境データも紹介します。">
+<title>ふじさわレンズ｜藤沢市の避難先・環境・備え</title>
+<meta name="description" content="藤沢市の災害種別ごとの避難先を探し、公式情報へすぐ移動できる軽量なホームページ。地域の環境データと日頃の防災準備も確認できます。">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" href="data:,">
 </head>
@@ -14,49 +14,58 @@
   <a class="brand" href="./">ふじさわレンズ</a>
   <nav aria-label="サイト内">
     <ul>
-      <li><a href="shelters.html">避難先を探す</a></li>
-      <li><a href="crowding.html">混雑状況</a></li>
-      <li><a href="environment.html">環境の変化</a></li>
-      <li><a href="sources.html">出典・データ</a></li>
-      <li><a href="privacy.html">プライバシー・注意事項</a></li>
+      <li><a href="shelters.html">避難先</a></li>
+      <li><a href="crowding.html">開設・混雑</a></li>
+      <li><a href="environment.html">環境</a></li>
+      <li><a href="prepare.html">備え</a></li>
     </ul>
   </nav>
 </header>
 <main id="main">
-  <h1>ふだんは街を知る。災害時は必要な情報にすぐたどり着く。</h1>
+  <h1 class="visually-compact">藤沢市の避難先・環境・備え</h1>
 
-  <section class="emergency" aria-labelledby="h-emergency">
-    <h2 id="h-emergency">災害時はこちら</h2>
-    <a class="bigbtn" href="shelters.html">災害の種類から避難先を探す</a>
-    <a class="bigbtn secondary" href="crowding.html">避難所の混雑状況</a>
-    <p><strong>避難指示・警報などは必ず公式情報を確認してください。</strong></p>
-    <ul>
-      <li><a href="https://www.city.fujisawa.kanagawa.jp/kinkyu/index.html" rel="noopener">藤沢市 緊急情報一覧</a></li>
-      <li><a href="https://bosaiinfo.city.fujisawa.kanagawa.jp/" rel="noopener">ふじさわ防災ナビ 防災インフォメーション（藤沢市）</a></li>
-      <li><a href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&amp;area_code=1420500" rel="noopener">気象庁 藤沢市の警報・注意報</a></li>
-      <li><a href="https://www.jma.go.jp/bosai/risk/" rel="noopener">気象庁 キキクル（危険度分布）</a></li>
+  <section class="entry emergency" aria-labelledby="h-emergency">
+    <h2 id="h-emergency">災害時：何から避難しますか？</h2>
+    <div class="tile-grid">
+      <a class="tile" href="shelters.html?hazard=flood">洪水</a>
+      <a class="tile" href="shelters.html?hazard=earthquake">地震</a>
+      <a class="tile" href="shelters.html?hazard=tsunami">津波</a>
+      <a class="tile" href="shelters.html?hazard=landslide">崖崩れ・土石流・地滑り</a>
+      <a class="tile" href="shelters.html?hazard=large_fire">大規模な火事</a>
+      <a class="tile" href="shelters.html?hazard=inland_flood">内水氾濫</a>
+      <a class="tile" href="shelters.html?hazard=volcano">火山現象</a>
+      <a class="tile" href="shelters.html?hazard=shelter">避難所（滞在用）<small>災害後に過ごす施設</small></a>
+    </div>
+    <ul class="entry-links">
+      <li><a href="crowding.html">避難所が開いているか・混雑<small>藤沢市の公式情報へ</small></a></li>
+      <li><a href="https://www.city.fujisawa.kanagawa.jp/kinkyu/index.html" rel="noopener">避難情報・緊急情報<small>藤沢市（公式）</small></a></li>
+      <li><a href="https://www.jma.go.jp/bosai/warning/#area_type=class20s&amp;area_code=1420500" rel="noopener">警報・注意報<small>気象庁（公式）</small></a></li>
     </ul>
-    <p class="small">当サイトは藤沢市・気象庁などの公式発表の代わりではありません。現地の状況と避難指示を優先してください。</p>
+    <p class="small">当サイトは公式発表の代わりではありません。避難指示と現地の状況を優先してください。高潮・津波避難ビル・福祉避難所はこのサイトでは検索できません（<a href="shelters.html#h-missing">公式情報への案内</a>）。</p>
   </section>
 
-  <section aria-labelledby="h-env">
-    <h2 id="h-env">藤沢の環境を知る</h2>
-    <p>土地利用・緑地の変化、海水浴場の水質、大気環境など、公開データを出典つきでまとめています。</p>
-    <p><a href="environment.html">藤沢の環境変化を見る</a></p>
+  <section class="entry" aria-labelledby="h-env">
+    <h2 id="h-env">藤沢の環境変化を調べる</h2>
+    <ul class="entry-links">
+      <li><a href="environment.html#landcover">土地の使われ方の変化<small>2020・2022・2024年を約250m四方ごとに比較（衛星データ）</small></a></li>
+      <li><a href="environment.html#air">大気の推移<small>市内5か所の測定局、2015〜2025年度</small></a></li>
+      <li><a href="environment.html#water">海水浴場の水質<small>片瀬・鵠沼・辻堂、2024〜2026年度</small></a></li>
+    </ul>
   </section>
 
-  <section aria-labelledby="h-status">
-    <h2 id="h-status">データの更新状況</h2>
-    <div id="data-status"><p class="muted">読み込み中…（JavaScript が無効な場合は <a href="sources.html">出典・データ</a> を確認してください）</p></div>
-    <p class="small muted">更新は自動ではなく、保守担当者がデータ取込スクリプトを実行した時点の内容です。</p>
+  <section class="entry" aria-labelledby="h-prepare">
+    <h2 id="h-prepare">日頃の防災準備を確認する</h2>
+    <p class="lead">水・食料、明かり、電源、連絡方法、避難先などをチェックリストで確認できます。記録はこの端末の中だけに保存されます。</p>
+    <p id="prepare-progress" class="small muted"></p>
+    <a class="bigbtn secondary" href="prepare.html">備えのチェックリストを開く</a>
   </section>
 </main>
 <footer class="site">
   <ul>
-    <li><a href="sources.html">出典・データの扱い</a></li>
+    <li><a href="sources.html">出典・データの扱い・更新状況</a></li>
     <li><a href="privacy.html">プライバシー・注意事項</a></li>
   </ul>
-  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
+  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。公式発表の代わりではありません。</p>
 </footer>
 <script type="module" src="assets/js/home.js"></script>
 </body>
