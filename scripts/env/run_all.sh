@@ -11,6 +11,7 @@ if [ ! -x "$VENV/bin/python" ]; then
 fi
 cd "$ROOT"   # scripts are run with -I, so nothing is imported from the CWD
 "$VENV/bin/python" -I scripts/env/landcover.py
+"$VENV/bin/python" -I scripts/env/landcover_grid.py   # after landcover.py; reads site/data/shelters.json for district labels
 "$VENV/bin/python" -I scripts/env/water_quality.py
 "$VENV/bin/python" -I scripts/env/air_quality.py
 ls -l site/data/environment/
