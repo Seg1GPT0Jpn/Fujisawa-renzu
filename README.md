@@ -146,6 +146,19 @@ CROWDING_API_BASE=https://fujisawa-lens-crowding.<あなたのサブドメイン
 
 ## 静的サイトの公開（利用者が行う作業）
 
+### GitHub Pages で公開する場合
+
+`.github/workflows/pages.yml` が、`main` ブランチへの push 時に単体テストと内部リンク確認を行い、成功したら `site/` を GitHub Pages に公開します。
+
+1. `main` ブランチを用意し（作業ブランチをマージ）、Settings → General の Default branch を `main` にする
+2. Settings → Pages → Build and deployment → Source を「GitHub Actions」にする
+3. `main` に push するか、Actions タブの「Deploy site to GitHub Pages」→「Run workflow」で実行
+4. 公開URL（例：`https://<ユーザー名>.github.io/fujisawa-renzu/`）は Actions の実行結果と Settings → Pages に表示される
+
+公開ページは誰でも閲覧できます。
+
+### その他のホスティング
+
 `site/` フォルダをそのまま静的ホスティングに配置します（GitHub Pages、Cloudflare Pages など）。ビルド工程はありません。HTTPS で配信してください（Service Worker と位置情報に必要）。gzip/brotli 圧縮配信が有効なホスティングを推奨します。
 
 ## 通信量
