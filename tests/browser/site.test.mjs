@@ -8,7 +8,7 @@ import { startServer } from '../../scripts/dev-server.mjs';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 
-const PAGES = ['index.html', 'shelters.html', 'crowding.html', 'environment.html', 'sources.html', 'privacy.html', 'offline.html'];
+const PAGES = ['index.html', 'shelters.html', 'crowding.html', 'environment.html', 'prepare.html', 'sources.html', 'privacy.html', 'offline.html'];
 let server; let apiServer; let browser; let base; let apiBase;
 
 before(async () => {

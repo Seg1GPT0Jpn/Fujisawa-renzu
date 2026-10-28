@@ -13,7 +13,7 @@ import { startServer } from './dev-server.mjs';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 const ROOT = new URL('..', import.meta.url).pathname;
-const PAGES = ['index.html', 'shelters.html', 'crowding.html', 'environment.html', 'sources.html', 'privacy.html'];
+const PAGES = ['index.html', 'shelters.html', 'crowding.html', 'environment.html', 'prepare.html', 'sources.html', 'privacy.html'];
 const MD = process.argv.includes('--markdown');
 
 async function sizes(pathname) {

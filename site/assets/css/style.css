@@ -188,3 +188,17 @@ table.water td { text-align: center; }
 .g-c { background: #ffe0b3; color: #3d2400; }
 .grade-legend { list-style: none; padding: 0; }
 .grade-legend span { display: inline-block; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; font-weight: 700; }
+
+/* ---- V2：チェックリスト ---- */
+.progress { position: sticky; top: 0; background: var(--bg); padding: 6px 0; z-index: 2; border-bottom: 1px solid var(--line); }
+.progress p { margin: 0 0 4px; }
+.progress .bar { height: 10px; border: 1px solid var(--fg); background: var(--panel); }
+.progress .bar > span { display: block; height: 100%; background: var(--accent); }
+.check-section { margin: 16px 0; }
+.check-section legend { font-weight: 700; font-size: 1.05rem; }
+.check-item { border-bottom: 1px solid var(--line); padding: 4px 0; }
+.check-item label, #focus-options label { font-weight: 400; display: flex; align-items: flex-start; gap: 10px; min-height: 44px; margin: 0; padding-top: 8px; }
+.check-item input, #focus-options input { width: 22px; height: 22px; flex: none; margin-top: 2px; }
+.check-item small, #focus-options small { display: block; color: var(--muted); font-size: 0.85rem; }
+.check-item .src { margin: 0 0 4px 32px; }
+.g-aa a, .g-a a, .g-b a, .g-c a { color: #0b3d75; }

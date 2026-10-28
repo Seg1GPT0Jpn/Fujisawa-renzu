@@ -3,17 +3,18 @@
 // 方針：同一オリジンの GET のみ扱う。常にネットワークを優先し、失敗・タイムアウト時だけ保存済みの内容を返す。
 //       保存済みの JSON を返すときは X-FL-Saved-At ヘッダで保存日時を伝え、画面で「最新ではない」ことを示す。
 //       混雑共有API（別オリジン）は一切キャッシュしない。
-const CACHE = 'fujisawa-lens-v1';
+const CACHE = 'fujisawa-lens-v2';
 const SAVED_AT = 'X-FL-Saved-At';
 const NETWORK_TIMEOUT_MS = 5000;
 
 // 初回訪問時に保存するもの（避難に必要な最小限。環境データは閲覧時に保存）
 const PRECACHE = [
-  './', 'index.html', 'shelters.html', 'crowding.html', 'sources.html', 'privacy.html', 'offline.html',
+  './', 'index.html', 'shelters.html', 'crowding.html', 'prepare.html', 'sources.html', 'privacy.html', 'offline.html',
   'config.js', 'assets/css/style.css',
   'assets/js/common.js', 'assets/js/common-init.js', 'assets/js/geo.js', 'assets/js/home.js', 'assets/js/shelters.js',
-  'assets/js/crowding.js', 'assets/js/crowding-client.js',
-  'data/shelters.json', 'data/status.json',
+  'assets/js/crowding.js', 'assets/js/crowding-client.js', 'assets/js/checklist-store.js', 'assets/js/prepare.js',
+  'assets/js/sources.js',
+  'data/shelters.json', 'data/status.json', 'data/checklist.json',
 ];
 
 async function putWithTimestamp(cache, request, response) {

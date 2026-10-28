@@ -49,3 +49,24 @@ test('環境データ：出典・状態が記載され、欠測を0で埋めて�
     }
   }
 });
+
+test('チェックリスト：全項目に存在する出典があり、IDが一意で保存形式に合う', async () => {
+  const c = await read('site/data/checklist.json');
+  const sources = new Set(c.sources.map((s) => s.id));
+  for (const s of c.sources) assert.match(s.url, /^https:\/\//);
+  const ids = new Set();
+  const groups = [...c.sections, ...c.hazardSections, ...c.familySections];
+  for (const g of groups) {
+    assert.match(g.id, /^[a-z_]{1,20}$/, `section id ${g.id}`);
+    for (const it of g.items) {
+      assert.ok(sources.has(it.source), `${it.id}: 出典 ${it.source}`);
+      assert.match(it.id, /^[a-z0-9-]{1,40}$/);
+      assert.ok(!ids.has(it.id), `重複 ${it.id}`);
+      ids.add(it.id);
+    }
+  }
+  assert.ok(ids.size >= 30);
+  // 飲料水の数量は出典の記載どおり
+  const water = c.sections.flatMap((s) => s.items).find((i) => i.id === 'water-3d');
+  assert.match(`${water.text}${water.detail}`, /3日分.*1人1日3リットル/);
+});

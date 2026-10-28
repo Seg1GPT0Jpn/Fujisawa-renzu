@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>備えのチェックリスト｜ふじさわレンズ</title>
+<meta name="description" content="水・食料、明かり、電源、連絡方法、避難先などの備えを確認できるチェックリスト。記録は端末内にだけ保存します。">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+<header class="site">
+  <a class="brand" href="./">ふじさわレンズ</a>
+  <nav aria-label="サイト内">
+    <ul>
+      <li><a href="shelters.html">避難先</a></li>
+      <li><a href="crowding.html">開設・混雑</a></li>
+      <li><a href="environment.html">環境</a></li>
+      <li><a href="prepare.html" aria-current="page">備え</a></li>
+    </ul>
+  </nav>
+</header>
+<main id="main">
+  <h1>備えのチェックリスト</h1>
+  <p class="small">首相官邸・内閣府の「災害の備え」チェックリストと、藤沢市・気象庁の情報をもとにしています。チェックした内容は<strong>この端末のブラウザの中だけ</strong>に保存し、どこにも送信しません。</p>
+
+  <noscript><p class="notice warn">チェックの保存には JavaScript が必要です。出典の<a href="https://www.kantei.go.jp/jp/content/000182715.pdf">首相官邸「災害の『備え』チェックリスト」（PDF）</a>も使えます。</p></noscript>
+
+  <div id="progress" class="progress" role="status" aria-live="polite"></div>
+  <div id="storage-state"></div>
+
+  <form id="checklist" hidden>
+    <fieldset class="radio-list" id="focus">
+      <legend>あなたに当てはまるもの（項目が追加されます）</legend>
+      <div id="focus-options"></div>
+    </fieldset>
+    <div id="sections"></div>
+    <div class="links-row">
+      <button type="button" class="btn" id="reset-btn">チェックをすべて消す</button>
+    </div>
+  </form>
+
+  <section aria-labelledby="h-src" class="small">
+    <h2 id="h-src">出典</h2>
+    <ul id="sources"><li>読み込み後に表示します。</li></ul>
+    <p>数量（飲料水 1人1日3リットル・3日分など）は出典に書かれている目安です。家族の人数や持病などに合わせて調整してください。</p>
+  </section>
+</main>
+<footer class="site">
+  <ul>
+    <li><a href="sources.html">出典・データの扱い・更新状況</a></li>
+    <li><a href="privacy.html">プライバシー・注意事項</a></li>
+  </ul>
+  <p>ふじさわレンズは非公式サイトです。藤沢市・神奈川県・国の機関が運営するものではありません。</p>
+</footer>
+<script type="module" src="assets/js/prepare.js"></script>
+</body>
+</html>

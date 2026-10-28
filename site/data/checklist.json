@@ -1,0 +1,417 @@
+{
+ "version": 1,
+ "checkedAt": "2026-10-28",
+ "note": "項目・数量は下の公式資料に記載された内容のみ。資料の文章は転載せず要約しています。",
+ "sources": [
+  {
+   "id": "kantei",
+   "name": "首相官邸「災害に対するご家庭での備え〜これだけは準備しておこう！〜」",
+   "url": "https://www.kantei.go.jp/jp/headline/bousai/sonae.html"
+  },
+  {
+   "id": "kantei-pdf",
+   "name": "首相官邸「災害の『備え』チェックリスト」（PDF、監修：内閣府）",
+   "url": "https://www.kantei.go.jp/jp/content/000182715.pdf"
+  },
+  {
+   "id": "fujisawa-hazard",
+   "name": "藤沢市 ハザードマップ（ふじさわ防災ナビ）",
+   "url": "https://bosaiinfo.city.fujisawa.kanagawa.jp/evacuation/hazardMap/"
+  },
+  {
+   "id": "fujisawa-flood",
+   "name": "藤沢市 ハザードマップ「土砂災害・洪水・内水」",
+   "url": "https://www.city.fujisawa.kanagawa.jp/bosai/bosai/hazardmap/dosha/index.html"
+  },
+  {
+   "id": "fujisawa-tsunami",
+   "name": "藤沢市 ハザードマップ「津波」",
+   "url": "https://www.city.fujisawa.kanagawa.jp/bosai/bosai/hazardmap/tsunami/index.html"
+  },
+  {
+   "id": "fujisawa-tsunami-bldg",
+   "name": "藤沢市「津波避難ビル」",
+   "url": "https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/bosai/tunamihinanbiruichiran.html"
+  },
+  {
+   "id": "fujisawa-tsunami-map",
+   "name": "藤沢市「（片瀬・鵠沼・辻堂地区）地域ごとの津波避難マップ」",
+   "url": "https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/tsunamihinanmap.html"
+  },
+  {
+   "id": "fujisawa-surge",
+   "name": "藤沢市「指定緊急避難場所（高潮）指定先一覧」（PDF）",
+   "url": "https://www.city.fujisawa.kanagawa.jp/documents/20769/siteikinnkyu_takasio.pdf"
+  },
+  {
+   "id": "fujisawa-shelters",
+   "name": "藤沢市「指定避難所・指定緊急避難場所の指定について」",
+   "url": "https://www.city.fujisawa.kanagawa.jp/kikikanri/bosai/siteihinannjyo.html"
+  },
+  {
+   "id": "jma-risk",
+   "name": "気象庁 キキクル（危険度分布）",
+   "url": "https://www.jma.go.jp/bosai/risk/"
+  },
+  {
+   "id": "mlit-portal",
+   "name": "国土交通省 ハザードマップポータルサイト",
+   "url": "https://disaportal.gsi.go.jp/"
+  }
+ ],
+ "sections": [
+  {
+   "id": "stock",
+   "title": "水・食料の備蓄（家族の人数分）",
+   "items": [
+    {
+     "id": "water-3d",
+     "text": "飲料水 3日分",
+     "detail": "1人1日3リットルが目安",
+     "source": "kantei"
+    },
+    {
+     "id": "food-3d",
+     "text": "非常食 3日分",
+     "detail": "アルファ米などのご飯、レトルト食品、缶詰、乾パン、ビスケットなど",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "stock-1w",
+     "text": "大規模災害に備えて、できれば1週間分",
+     "source": "kantei"
+    },
+    {
+     "id": "rolling",
+     "text": "保存できる食品を多めに買い、食べたら買い足す習慣にしている",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "life-water",
+     "text": "生活用水（ポリタンクに水道水、お風呂の水を張っておく）",
+     "source": "kantei"
+    },
+    {
+     "id": "daily-goods",
+     "text": "生活用品（トイレットペーパー、ティッシュ、ラップ、ごみ袋、ポリタンク）",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "toilet",
+     "text": "携帯トイレ・簡易トイレ",
+     "source": "kantei"
+    },
+    {
+     "id": "stove",
+     "text": "カセットコンロ",
+     "source": "kantei"
+    }
+   ]
+  },
+  {
+   "id": "power",
+   "title": "明かり・電源・情報",
+   "items": [
+    {
+     "id": "flashlight",
+     "text": "懐中電灯",
+     "detail": "手動充電式が便利",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "radio",
+     "text": "携帯ラジオ",
+     "detail": "手動充電式が便利",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "battery",
+     "text": "予備電池・携帯電話の充電器",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "match",
+     "text": "マッチ・ろうそく",
+     "source": "kantei-pdf"
+    }
+   ]
+  },
+  {
+   "id": "bag",
+   "title": "非常用持ち出し袋（避難するときに持ち出すもの）",
+   "items": [
+    {
+     "id": "bag-pack",
+     "text": "持ち出すものをリュックサックにまとめてある",
+     "source": "kantei"
+    },
+    {
+     "id": "bag-water-food",
+     "text": "水・食品",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "valuables",
+     "text": "貴重品",
+     "detail": "通帳、現金、パスポート、運転免許証、病院の診察券、マイナンバーカードなど",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "helmet",
+     "text": "防災用ヘルメット・防災ずきん",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "clothes",
+     "text": "衣類・下着、レインウェア、紐なしのズック靴",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "firstaid",
+     "text": "救急用品",
+     "detail": "ばんそうこう、包帯、消毒液、常備薬など",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "warm",
+     "text": "使い捨てカイロ・ブランケット",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "gloves",
+     "text": "軍手",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "hygiene",
+     "text": "洗面用具、歯ブラシ・歯磨き粉、タオル",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "infection",
+     "text": "マスク、手指消毒用アルコール、石けん、ウェットティッシュ、体温計",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "pen",
+     "text": "ペン・ノート",
+     "source": "kantei-pdf"
+    }
+   ]
+  },
+  {
+   "id": "home",
+   "title": "家の中の安全（地震への備え）",
+   "items": [
+    {
+     "id": "furniture",
+     "text": "家具を壁に固定している",
+     "source": "kantei"
+    },
+    {
+     "id": "bedroom",
+     "text": "寝室・子ども部屋には家具をなるべく置かない（置くなら背の低いものを、倒れても出入口をふさがない向きに）",
+     "source": "kantei"
+    },
+    {
+     "id": "bedside",
+     "text": "懐中電灯・スリッパ・ホイッスルを手の届くところに置いている",
+     "source": "kantei"
+    }
+   ]
+  },
+  {
+   "id": "contact",
+   "title": "連絡方法",
+   "items": [
+    {
+     "id": "family-plan",
+     "text": "家族で安否確認の方法と集合場所を話し合ってある",
+     "source": "kantei"
+    },
+    {
+     "id": "dial171",
+     "text": "災害用伝言ダイヤル「171」の使い方を知っている",
+     "detail": "体験利用：毎月1日・15日、1月1日〜3日、1月15日〜21日、8月30日〜9月5日",
+     "source": "kantei"
+    },
+    {
+     "id": "web171",
+     "text": "携帯電話の災害用伝言板の使い方を知っている",
+     "source": "kantei"
+    }
+   ]
+  },
+  {
+   "id": "evac",
+   "title": "避難先",
+   "items": [
+    {
+     "id": "hazardmap",
+     "text": "ハザードマップで、自宅・職場・学校の周りの危険を確認した",
+     "source": "fujisawa-hazard",
+     "link": {
+      "href": "https://bosaiinfo.city.fujisawa.kanagawa.jp/evacuation/hazardMap/",
+      "text": "藤沢市のハザードマップ"
+     }
+    },
+    {
+     "id": "evac-by-type",
+     "text": "災害の種類ごとに避難先と経路を確認した（種類によって安全な場所が違う）",
+     "source": "kantei",
+     "link": {
+      "href": "shelters.html",
+      "text": "このサイトで避難先を探す"
+     }
+    },
+    {
+     "id": "shelter-stay",
+     "text": "家に戻れないときに過ごす避難所（指定避難所）を確認した",
+     "source": "fujisawa-shelters",
+     "link": {
+      "href": "shelters.html?hazard=shelter",
+      "text": "指定避難所を探す"
+     }
+    }
+   ]
+  }
+ ],
+ "hazardSections": [
+  {
+   "id": "tsunami",
+   "title": "津波",
+   "hint": "片瀬・鵠沼・辻堂など沿岸部",
+   "items": [
+    {
+     "id": "tsunami-zone",
+     "text": "津波ハザードマップで、自宅などが浸水が想定される区域か確認した",
+     "source": "fujisawa-tsunami"
+    },
+    {
+     "id": "tsunami-bldg",
+     "text": "近くの津波避難ビルと、そこまでの経路を確認した",
+     "source": "fujisawa-tsunami-bldg"
+    },
+    {
+     "id": "tsunami-map",
+     "text": "地域ごとの津波避難マップを確認した",
+     "source": "fujisawa-tsunami-map"
+    }
+   ]
+  },
+  {
+   "id": "flood",
+   "title": "洪水・土砂災害・内水氾濫（大雨）",
+   "items": [
+    {
+     "id": "flood-map",
+     "text": "土砂災害・洪水・内水のハザードマップで、自宅などの危険を確認した",
+     "source": "fujisawa-flood"
+    },
+    {
+     "id": "kikikuru",
+     "text": "大雨のときに見る、気象庁のキキクル（危険度分布）の場所を知っている",
+     "source": "jma-risk"
+    },
+    {
+     "id": "flood-evac",
+     "text": "洪水・崖崩れの指定緊急避難場所を確認した",
+     "source": "fujisawa-shelters",
+     "link": {
+      "href": "shelters.html?hazard=flood",
+      "text": "洪水の避難先を探す"
+     }
+    }
+   ]
+  },
+  {
+   "id": "surge",
+   "title": "高潮",
+   "hint": "沿岸部",
+   "items": [
+    {
+     "id": "surge-map",
+     "text": "高潮ハザードマップで、自宅などの危険を確認した",
+     "source": "fujisawa-hazard"
+    },
+    {
+     "id": "surge-evac",
+     "text": "高潮の指定緊急避難場所を、藤沢市の一覧（PDF）で確認した（このサイトでは検索できません）",
+     "source": "fujisawa-surge"
+    }
+   ]
+  },
+  {
+   "id": "away",
+   "title": "藤沢市の外にいるときも",
+   "hint": "通勤・通学・旅行先",
+   "items": [
+    {
+     "id": "away-map",
+     "text": "よく行く場所の危険を、国のハザードマップポータルで確認した",
+     "source": "mlit-portal"
+    }
+   ]
+  }
+ ],
+ "familySections": [
+  {
+   "id": "children",
+   "title": "子どもがいる",
+   "items": [
+    {
+     "id": "child-milk",
+     "text": "粉ミルク（アレルギー用を含む）または液体ミルク、使い捨て哺乳瓶、離乳食",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "child-care",
+     "text": "子ども用紙おむつ、おしりふき、携帯用おしり洗浄機",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "child-other",
+     "text": "携帯カトラリー、ネックライト、抱っこひも、子どもの靴",
+     "source": "kantei-pdf"
+    }
+   ]
+  },
+  {
+   "id": "women",
+   "title": "女性の備え",
+   "items": [
+    {
+     "id": "women-sanitary",
+     "text": "生理用品、サニタリーショーツ、おりものシート",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "women-other",
+     "text": "中身の見えないごみ袋、防犯ブザー・ホイッスル",
+     "source": "kantei-pdf"
+    }
+   ]
+  },
+  {
+   "id": "elderly",
+   "title": "高齢者がいる",
+   "items": [
+    {
+     "id": "elder-med",
+     "text": "持病の薬、お薬手帳のコピー",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "elder-care",
+     "text": "大人用紙パンツ、吸水パッド、介護食、デリケートゾーンの洗浄剤",
+     "source": "kantei-pdf"
+    },
+    {
+     "id": "elder-aids",
+     "text": "杖、補聴器、入れ歯・入れ歯用洗浄液",
+     "source": "kantei-pdf"
+    }
+   ]
+  }
+ ]
+}

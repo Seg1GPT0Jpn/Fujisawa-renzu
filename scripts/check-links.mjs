@@ -42,8 +42,9 @@ if (!INTERNAL_ONLY) {
   for (const [u, from] of external) {
     if (u.includes('<') || u.includes('example')) continue;
     try {
-      let res = await fetch(u, { method: 'HEAD', redirect: 'follow' });
-      if (res.status === 405 || res.status === 403 || res.status === 501) res = await fetch(u, { redirect: 'follow' });
+      const headers = { 'User-Agent': 'Mozilla/5.0 (compatible; fujisawa-lens-linkcheck)' };
+      let res = await fetch(u, { method: 'HEAD', redirect: 'follow', headers });
+      if (res.status === 405 || res.status === 403 || res.status === 501) res = await fetch(u, { redirect: 'follow', headers });
       const line = `${res.status} ${u}`;
       if (res.status >= 400) problems.push(`外部リンク異常 ${line}（${from[0]}）`); else console.log(line);
     } catch (e) {
